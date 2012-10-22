@@ -9,14 +9,14 @@
 		<?php
 		// Sinon : champ de connexion (Pseudo - Mot de passe) + lien d'inscription
 		?>
-	
+	<div id="LogBanner">
 	<form method="post" action="members/signin.php">
-		<label for="pseudo">Username :</label>   <input type="text" name="pseudo" id="pseudo" /> 
-		<br />
-		<label for="pass">Password :</label> <input type="password" name="pass" id="pass" />
-		<br />
+		<label for="pseudo">Username :</label>
+		<input type="text" name="pseudo" id="pseudo" /> 
+		<label for="pass">Password :</label>
+		<input type="password" name="pass" id="pass" />
 		<input type="submit" value="Login" />
 	</form>
-		
 	<a href="signup.php">Create Account</a>
+	</div>
 </div>
