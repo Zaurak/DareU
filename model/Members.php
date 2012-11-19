@@ -32,7 +32,7 @@ class Members
 		while($data = $answer->fetch())
 		{
 			if($data['image'] == null)
-				$data['image'] = 'http://www.veev.fr/medias/images/shop/refs/Seance-de-prises-de-vue-portrait-d-une-heure-avec-Etienne-LIST-photographe-professionnel-d-art-et-de-portrait-215-0a-1289313696.jpg';
+				$data['image'] = 'http://img7.xooimage.com/files/f/c/4/stouffr-holiday-tux-4a156e.png';
 
 			$profiles[] = array(
 						'pseudo'	=> $data['pseudo'],
