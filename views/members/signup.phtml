@@ -1,2 +1,30 @@
 <h1>sign up</h1>
-<p></p>
+
+    <form method="post" action="">
+	<table>
+
+	    <tr>
+		    <td><label for="pseudo">Nickname:</label></td>
+		    <td><input type="text" name="pseudo" id="pseudo" placeholder="Ex : Toto" size="45" maxlength="30" autofocus required /></td>
+	    </tr>
+	    <tr>
+		    <td><label for="mail">Mail:</label></td>
+		    <td><input type="email" name="mail" id="mail" placeholder="Ex : organizer@gmail.com" size="45" maxlength="30" /></td>
+	    </tr>
+	    <tr>
+		<td><label for="password">Password:</label></td>
+		<td><input type="password" name="password" id="password" placeholder="Ex : bAZKbfernbJFbe" size="45" maxlength="30" /></td>
+		</tr>
+		<tr>
+		    <td><label for="sexe">Sexe:</label></td>
+		    <td>
+			<select name="sexe" id="sexe">
+			   <option value="1">Homme</option>
+			   <option value="0">Femme</option>
+			</select>
+		    </td>
+		</tr>
+	</table>
+    
+	<input type="submit" value="Send" />
+    </form>
