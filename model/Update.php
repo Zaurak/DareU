@@ -11,7 +11,7 @@ class Update
 
 	/* 
 	Update constructor
-	Fill the fields from a giver id
+	Fill the fields from a given id
 	*/
 	public function __construct($idUpdate)
 	{
@@ -44,5 +44,36 @@ class Update
     public function save()
     {
         // INSERT, UPDATE
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}
+		catch(PDOException $e) {
+			echo 'Connexion Failed : ' . $e->getMessage();
+			exit();
+		}
+
+		if(empty($this->idUpdate)) {
+			$req = $bdd->prepare('INSERT INTO Member(content, date, service, idMember) VALUES(:content, :date, :service, :idMember');
+
+			$req->execute(array(
+					'content'		=> $this->content,
+					'date'			=> $this->date,
+					'service'		=> $this->service,
+					'idMember'		=> $this->idMember
+					));
+		}
+		else {
+			$req = $bdd->prepare('UPDATE Member SET content = :content, date = :date, service = :service, idMember = :idMember WHERE idUpdate = :idUpdate');
+
+			$req->execute(array(
+					'content'		=> $this->content,
+					'date'			=> $this->date,
+					'service'		=> $this->service,
+					'idMember'		=> $this->idMember,
+					'idUpdate'		=> $this->idUpdate
+					));
+		}
+		$req->closeCursor();    
     }
 }

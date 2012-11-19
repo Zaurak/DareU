@@ -61,7 +61,7 @@ class Members
 	   	$answer = $bdd->prepare('SELECT idMember FROM Member WHERE pseudo = :pseudo AND password = :password');
 
 	   	$answer->execute(array(
-	   						'pseudo' 	=> $pseudo,
+	   						'pseudo' 	=> $username,
 	   						'password'	=> $password
 							));
 		
@@ -115,6 +115,20 @@ class Members
     public static function delete($idMember)
     {
         // DELETE
-    }
+		if($idMember != null) {	
+       		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+	   		try {
+				$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+			}
+			catch (PDOException $e) {
+				echo 'Connexion failed : ' . $e->getMessage();
+				exit();
+			}
+			
+			$req = $bdd->prepare('DELETE FROM Member WHERE idMember = ?');
+			$req->execute($idMember);
 
+			$req->closeCursor();
+		}
+    }
 }
