@@ -16,7 +16,13 @@ class Update
 	public function __construct($idUpdate)
 	{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-		$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+		try {
+			$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+		}
+		catch(PDOException $e) {
+			echo 'Connexion Failed : ' . $e->getMessage();
+			exit();
+		}
 		
 		$answer = bdd->prepare('SELECT * FROM Update WHERE idUpdate = ?');
 		$answer->execute($idUpdate);

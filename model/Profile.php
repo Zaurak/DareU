@@ -21,7 +21,13 @@ class Profile
     {
         // Member initialisation
 		$pdo_options[PDO::ATTR__ERRMODE] = PDO::ERRMODE_EXCEPTION;
-		$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+		try {
+			$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+		}
+		catch(PDOException $e) {
+			echo 'Connexion Failed : ' . $e->getMessage();
+			exit();
+		}
 		
 		$answer = $bdd->prepare('SELECT pseudo FROM Member WHERE idMember = ?');
 		$answer->execute($idMember);

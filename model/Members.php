@@ -1,6 +1,7 @@
 <?php
 require_once('config.php');
 require_once('Member.php');
+
 class Members
 {
     /*
@@ -12,7 +13,13 @@ class Members
     {
         // SELECT
        	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-	   	$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+	   	try {
+			$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+		}
+		catch (PDOException $e) {
+			echo 'Connexion failed : ' . $e->getMessage();
+			exit();
+		}
 		
 		if($mode == true) {
 			$answer = $bdd->prepare('SELECT pseudo, image FROM Member ORDER BY idMember DESC LIMIT 3');
@@ -40,8 +47,14 @@ class Members
     public static function signIn($username, $password)
     {
        	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-	   	$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
-
+	   	try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}	
+		catch (PDOException $e) {
+			echo 'Connexion failed : ' . $e->getMessage();
+			exit();
+		}
+			
 	   	$answer = $bdd->prepare('SELECT idMember FROM Member WHERE pseudo = :pseudo AND password = :password');
 
 	   	$answer->execute(array(
@@ -49,7 +62,7 @@ class Members
 	   						'password'	=> $password
 							));
 		
-		if(mysql_num_rows($answer) > 0) {
+		if($answer->rowCount() > 0) {
 			$answer->closeCursor();
 			return true;
 		}
@@ -67,12 +80,18 @@ class Members
     {
         // SELECT
        	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-	   	$bdd = new PDO('DSN', 'DB_USERNAME', 'DB_PASSWORD', $pdo_options);
+	   	try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}
+		catch (PDOException $e) {
+			echo 'Connexion failed : ' . $e->getMessage();
+			exit();
+		}
 
 		if($number > 0) {
 			$answer = $bdd->prepare('SELECT pseudo FROM Member LIMIT ?');
 			$answer->execute($number);
-		}
+		}		
 		else {
 			$answer = $bdd->prepare('SELECT pseudo FROM Member');
 			$answer->execute();
