@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Titre</title>
-    </head>
-		<body>
-			<?php include('header.php');  ?>
-			
-			<div id="content">
-				<h1> TITLE </h1>
-				
-            
-			
-			<?php include('footer.php'); ?>
-    </body>
-</html>
+<?php
+
+require_once dirname(__FILE__) . '/lightmvc/FrontController.php';
+
+FrontController::$isDebug = false;
+FrontController::$dirname = dirname(__FILE__);
+
+$front = FrontController::dispatch();
