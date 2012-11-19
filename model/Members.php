@@ -31,6 +31,9 @@ class Members
 
 		while($data = $answer->fetch())
 		{
+			if($data['image'] == null)
+				$data['image'] = 'http://www.veev.fr/medias/images/shop/refs/Seance-de-prises-de-vue-portrait-d-une-heure-avec-Etienne-LIST-photographe-professionnel-d-art-et-de-portrait-215-0a-1289313696.jpg';
+
 			$profiles[] = array(
 						'pseudo'	=> $data['pseudo'],
 						'image'		=> $data['image']
