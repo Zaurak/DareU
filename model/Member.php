@@ -99,7 +99,7 @@ class Member
 		}
 
 		if($this->idMember == 0) {
-			$req = $bdd->prepare('INSERT INTO Member(pseudo, email, password, sex, isAdmin, description, image, website) VALUES (:pseudo, :email, :password, :sex, :isAdmin, :description, :image, :website');	
+			$req = $bdd->prepare('INSERT INTO Member(pseudo, email, password, sex, isAdmin, description, image, website) VALUES (:pseudo, :email, :password, :sex, :isAdmin, :description, :image, :website)');	
 
 			$req->execute(array(
 					'pseudo'		=> $this->pseudo,

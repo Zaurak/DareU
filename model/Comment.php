@@ -26,7 +26,7 @@ class Comment
 		}
 
 		if(empty($this->idComment)) {
-			$req = $bdd->prepare('INSERT INTO Comment(content, date, idUpdate, idMember) VALUES(:content, :date, :idUpdate, :idMember');
+			$req = $bdd->prepare('INSERT INTO Comment(content, date, idUpdate, idMember) VALUES(:content, :date, :idUpdate, :idMember)');
 
 			$req->execute(array(
 					'content'		=> $this->content,

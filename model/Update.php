@@ -54,7 +54,7 @@ class Update
 		}
 
 		if(empty($this->idUpdate)) {
-			$req = $bdd->prepare('INSERT INTO Update(content, date, service, idMember) VALUES(:content, :date, :service, :idMember');
+			$req = $bdd->prepare('INSERT INTO Update(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
 
 			$req->execute(array(
 					'content'		=> $this->content,
