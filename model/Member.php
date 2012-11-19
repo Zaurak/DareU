@@ -3,15 +3,15 @@ require_once ('config.php');
 class Member
 {
     // put properties here
-	public $idMember;
-	public $pseudo;
-	public $email;
-	public $password;
-	public $sex;
-	public $isAdmin;
-	public $description;
-	public $image;
-	public $website;
+	private $idMember;
+	private $pseudo;
+	private $email;
+	private $password;
+	private $sex;
+	private $isAdmin;
+	private $description;
+	private $image;
+	private $website;
 	
     /*
     If the pseudo is not null, get the data from database and fill the properties
@@ -49,6 +49,38 @@ class Member
 			$answer->closeCursor();
 		}
     }
+
+	public function getPseudo() {
+		return $this->pseudo;
+	}
+
+	public function setPseudo($pseudo) {
+		$this->pseudo = $pseudo;
+	}
+
+	public function getEmail() {
+		return $this->email;
+	}
+
+	public function setEmail($email) {
+		$this->email = $email;
+	}
+	
+	public function getPassword() {
+		return $this->password;
+	}
+
+	public function setPassword($password) {
+		$this->password = $password;
+	}
+
+	public function getSex() {
+		return $this->sex;
+	}
+
+	public function setSex($sex) {
+		$this->sex = $sex;
+	}
     
     /*
     Save the member into the database. If the id property is null, create a new member
