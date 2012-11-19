@@ -15,9 +15,9 @@ class MembersController extends ActionController
     
     public function signupAction()
     {
-        if(isset($_POST['']) {
+       /* if(isset($_POST['']) {
 
-		}
+		}*/
     }
     
     public function signinAction()
