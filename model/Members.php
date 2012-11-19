@@ -11,7 +11,6 @@ class Members
     */
     public static function getFrontProfiles($mode = true)
     {
-        // SELECT
        	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 	   	try {
 			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
@@ -43,7 +42,59 @@ class Members
 
 		return $profiles;	
 	}
-    
+
+	/*
+	Return true if the pseudo is already taken
+	*/
+	public static function isPseudoTaken($pseudo) {
+       	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+	   	try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}
+		catch (PDOException $e) {
+			echo 'Connexion failed : ' . $e->getMessage();
+			exit();
+		}
+		
+		$req = $bdd->prepare('SELECT idMember FROM Member WHERE pseudo = :pseudo');
+		$req->execute(array('pseudo' => $pseudo));
+
+		if($req->fetch()) {
+			$req->closeCursor();
+			return true;
+		}
+		else {
+			$req->closeCursor();
+			return false;
+		}	
+	}	
+
+	/*
+	Return true if the email is already taken
+	*/
+	public static function isMailTaken($email) {
+       	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+	   	try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}
+		catch (PDOException $e) {
+			echo 'Connexion failed : ' . $e->getMessage();
+			exit();
+		}
+		
+		$req = $bdd->prepare('SELECT idMember FROM Member WHERE email = :email');
+		$req->execute(array('email' => $email));
+
+		if($req->fetch()) {
+			$req->closeCursor();
+			return true;
+		}
+		else {
+			$req->closeCursor();
+			return false;
+		}	
+	}
+
     /*
     * If username and password is in database, return TRUE. Otherwise, return false
     */ 

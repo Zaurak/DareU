@@ -23,14 +23,21 @@ class MembersController extends ActionController
 				$this->message = 'All fields are mandatory';
 			}
 			else {
-				$member = new Member();
-				$member->setPseudo($_POST['pseudo']);
-				$member->setPassword($_POST['password']);
-				$member->setEmail($_POST['email']);
-				$member->setSex($_POST['sex']);
-				$member->save();
-
-				$this->message = 'Welcome aboard !';
+				if(Members::isPseudoTaken($_POST['pseudo'])) {
+					$this->message = 'Pseudo already taken, please choose another one';
+				}
+				else if(Members::isMailTaken($_POST['email'])) {
+					$this->message = 'E-mail already taken, please choose another one';
+				}
+				else {
+					$member = new Member();
+					$member->setPseudo($_POST['pseudo']);
+					$member->setPassword($_POST['password']);
+					$member->setEmail($_POST['email']);
+					$member->setSex($_POST['sex']);
+					$member->save();
+					$this->message = 'Welcome aboard !';
+				}
 			}
 		}
     }
