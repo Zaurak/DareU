@@ -1,0 +1,28 @@
+<h1>Title</h1>
+<div id="page">
+			<section>
+				<article>
+
+			<a href="/members">Members</a>
+			<?php
+			
+
+			 		echo "<table><tr>";
+			 		foreach($frontProfiles As $member) {
+						echo "<td>";
+				   		echo $member['pseudo'] . '<br />';
+				   		?>
+
+				   		<img 	src="<?php echo $member['image']; ?>"
+				   				alt="Profile image"
+				  	 	/>
+				   		<br />
+				  
+				  	<?php
+					}
+			 		echo "</tr></table>";
+					?>
+				
+				</article>
+			</section>
+		</div>
