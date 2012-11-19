@@ -3,15 +3,15 @@ require_once ('config.php');
 class Member
 {
     // put properties here
-	private $idMember;
+	private $idMember 	= 0;
 	private $pseudo;
 	private $email;
 	private $password;
 	private $sex;
-	private $isAdmin;
-	private $description;
-	private $image;
-	private $website;
+	private $isAdmin 	= 0;
+	private $desc 		= 'No description';
+	private $image 		= '';
+	private $website 	= '';
 	
     /*
     If the pseudo is not null, get the data from database and fill the properties
@@ -42,7 +42,7 @@ class Member
 				$this->password		=	$data['password'];
 				$this->sex			=	$data['sex'];
 				$this->isAdmin		=	$data['isAdmin'];
-				$this->description	=	$data['description'];
+				$this->desc			=	$data['description'];
 				$this->image		=	$data['image'];
 				$this->website		=	$data['website'];	
 			}
@@ -98,8 +98,8 @@ class Member
 			exit();
 		}
 
-		if(empty($this->idMember)) {
-			$req = $bdd->prepare('INSERT INTO Member(pseudo, email, password, sex, isAdmin, description, image, website) VALUES(:pseudo, :email, :password, :sex, :isAdmin, :description, :image, :website');
+		if($this->idMember == 0) {
+			$req = $bdd->prepare('INSERT INTO Member(pseudo, email, password, sex, isAdmin, description, image, website) VALUES (:pseudo, :email, :password, :sex, :isAdmin, :description, :image, :website');	
 
 			$req->execute(array(
 					'pseudo'		=> $this->pseudo,
@@ -107,7 +107,7 @@ class Member
 					'password'		=> $this->password,
 					'sex'			=> $this->sex,
 					'isAdmin'		=> $this->isAdmin,
-					'description'	=> $this->description,
+					'description'	=> $this->desc,
 					'image'			=> $this->image, 
 					'website'		=> $this->website
 					));
@@ -121,7 +121,7 @@ class Member
 					'password'		=> $this->password,
 					'sex'			=> $this->sex,
 					'isAdmin'		=> $this->isAdmin,
-					'description'	=> $this->description,
+					'description'	=> $this->desc,
 					'image'			=> $this->image,
 					'website'		=> $this->website,
 					'idMember'		=> $this->idMember
