@@ -106,7 +106,7 @@ class Member
 		{
 			return $this->isAdmin;
 		}	
-    }
+    }    
     
-    
+
 }

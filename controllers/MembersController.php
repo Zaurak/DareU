@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../lightmvc/ActionController.php';
+require_once dirname(__FILE__) . '/../model/Member.php';
 
 class MembersController extends ActionController
 {
@@ -14,7 +15,9 @@ class MembersController extends ActionController
     
     public function signupAction()
     {
-        // use member : save
+        if(isset($_POST['']) {
+
+		}
     }
     
     public function signinAction()
