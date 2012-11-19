@@ -60,7 +60,17 @@ class MembersController extends ActionController
     
     public function listAction()
     {
-        // use members : list
+		$membersList = Members::getAll();
+
+		foreach($membersList as $member) {
+			$allMembers[] = array(
+								'pseudo' 	=> $member->getPseudo(),
+								'email'		=> $member->getEmail(),
+								'sex'		=> $member->getSex(),
+								'website'	=> $member->getWebsite()
+								);
+		}
+		$this->listMembers = $allMembers;
     }
     
     public function deleteAction()

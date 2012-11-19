@@ -1,2 +1,28 @@
 <h1>List</h1>
-<p></p>
+<?php 
+   	echo "<table>";
+	echo "<tr>
+		<th>Pseudo</th>
+		<th>E-mail</th>
+		<th>Sex</th>
+		<th>Website</th>
+		</tr>";
+
+   	foreach($listMembers As $member) {
+					
+		echo "<tr><td>";
+		echo $member['pseudo'];
+		echo "</td><td>";
+		echo '<a href="mailto:' . $member['email'] . '">' . $member['email'] . '</a>';
+		echo "</td><td>";
+		if ($member['sex'])
+			echo 'Male';
+		else
+			echo 'Female';
+		echo "</td><td>";
+		echo '<a href="' . $member['website'] . '">' . $member['website'] . '</a>';
+		echo "</td>\n";
+	}
+	echo "</table>";
+	?>
+

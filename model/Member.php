@@ -32,7 +32,7 @@ class Member
 
 			$answer = $bdd->prepare('SELECT * FROM Member WHERE pseudo = :pseudo');
 
-			$anwer->execute(array('pseudo' => $pseudo));
+			$answer->execute(array('pseudo' => $pseudo));
 			
 			if($data = $answer->fetch()) {
 
@@ -81,7 +81,14 @@ class Member
 	public function setSex($sex) {
 		$this->sex = $sex;
 	}
-    
+	
+	public function getWebsite() {
+		return $this->website;
+	}
+
+	public function setWebsite($website) {
+		$this->website = $website;
+	}
     /*
     Save the member into the database. If the id property is null, create a new member
     If not, just update it

@@ -116,7 +116,7 @@ class Members
 	   						'password'	=> $password
 							));
 		
-		if($answer->fetch() {
+		if($answer->fetch()) {
 			$answer->closeCursor();
 			return true;
 		}
