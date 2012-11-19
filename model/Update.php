@@ -54,7 +54,7 @@ class Update
 		}
 
 		if(empty($this->idUpdate)) {
-			$req = $bdd->prepare('INSERT INTO Member(content, date, service, idMember) VALUES(:content, :date, :service, :idMember');
+			$req = $bdd->prepare('INSERT INTO Update(content, date, service, idMember) VALUES(:content, :date, :service, :idMember');
 
 			$req->execute(array(
 					'content'		=> $this->content,
@@ -64,7 +64,7 @@ class Update
 					));
 		}
 		else {
-			$req = $bdd->prepare('UPDATE Member SET content = :content, date = :date, service = :service, idMember = :idMember WHERE idUpdate = :idUpdate');
+			$req = $bdd->prepare('UPDATE Update SET content = :content, date = :date, service = :service, idMember = :idMember WHERE idUpdate = :idUpdate');
 
 			$req->execute(array(
 					'content'		=> $this->content,
