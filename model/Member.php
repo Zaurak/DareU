@@ -2,7 +2,6 @@
 require_once ('config.php');
 class Member
 {
-    // put properties here
 	private $idMember 	= 0;
 	private $pseudo;
 	private $email;
@@ -21,6 +20,7 @@ class Member
 	{
 		if($pseudo != NULL)
 		{
+			// Connexion to the DB
 			$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 			try {
 				$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
@@ -29,7 +29,7 @@ class Member
 				echo 'Connexion Failed : ' . $e->getMessage();
 				exit();
 			}
-
+			// Get the member information from his user name
 			$answer = $bdd->prepare('SELECT * FROM Member WHERE pseudo = :pseudo');
 
 			$answer->execute(array('pseudo' => $pseudo));
@@ -89,13 +89,14 @@ class Member
 	public function setWebsite($website) {
 		$this->website = $website;
 	}
-    /*
+
+/*
     Save the member into the database. If the id property is null, create a new member
     If not, just update it
     */
     public function save()
     {
-        //UPDATE & INSERT
+		// Connexion to the DB
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		try {
 			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
@@ -104,8 +105,9 @@ class Member
 			echo 'Connexion Failed : ' . $e->getMessage();
 			exit();
 		}
-
+		// If the member hasn't been saved yet
 		if($this->idMember == 0) {
+			// Insert the current member in the DB 
 			$req = $bdd->prepare('INSERT INTO Member(pseudo, email, password, sex, isAdmin, description, image, website) VALUES (:pseudo, :email, :password, :sex, :isAdmin, :description, :image, :website)');	
 
 			$req->execute(array(
@@ -119,7 +121,9 @@ class Member
 					'website'		=> $this->website
 					));
 		}
+		// If the current member already is in the DB
 		else {
+			// Update his informations
 			$req = $bdd->prepare('UPDATE Member SET pseudo = :pseudo, email = :email, password = :password, sex = :sex, isAdmin = :isAdmin, description = :description, image = :image, website = :website WHERE idMember = :idMember');
 
 			$req->execute(array(

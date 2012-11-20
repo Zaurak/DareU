@@ -9,17 +9,17 @@ require_once('Update.php');
 class Profile
 {
     // Member type
-    public $member;
+    private $member;
     
     // Array of Update objects
-    public $updates;
+    private $updates;
     
     /*
     Fill all properties thanks to the database
     */
     public function __construct($idMember)
     {
-        // Member initialisation
+        // Connexion to the DB
 		$pdo_options[PDO::ATTR__ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		try {
 			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
@@ -29,6 +29,7 @@ class Profile
 			exit();
 		}
 		
+		// Select the member from the given id
 		$answer = $bdd->prepare('SELECT pseudo FROM Member WHERE idMember = ?');
 		$answer->execute($idMember);
 		
@@ -38,7 +39,7 @@ class Profile
 		}
 		$answer->closeCursor();
 		
-		// Updates initialisation
+		// Select the updates done by the member
 		$answer = bdd->prepare('SELECT idUpdate FROM Update WHERE idMember = ?');
 		$answer->execute($idMember);
 

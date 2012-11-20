@@ -3,7 +3,7 @@ require_once('config.php');
 class Update 
 {
     // put here the names of fields
-	public $idUpdate;
+	public $idUpdate 	= 0;
 	public $content;
 	public $date;
 	public $service;
@@ -15,6 +15,7 @@ class Update
 	*/
 	public function __construct($idUpdate)
 	{
+		// Connexion to the DB
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		try {
 			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
@@ -24,6 +25,7 @@ class Update
 			exit();
 		}
 		
+		// Select the update from the given id
 		$answer = bdd->prepare('SELECT * FROM Update WHERE idUpdate = ?');
 		$answer->execute($idUpdate);
 		
@@ -43,7 +45,7 @@ class Update
     */
     public function save()
     {
-        // INSERT, UPDATE
+        // Connexion to the DB
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		try {
 			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
@@ -52,8 +54,9 @@ class Update
 			echo 'Connexion Failed : ' . $e->getMessage();
 			exit();
 		}
-
-		if(empty($this->idUpdate)) {
+		// If the update hasn't been saved in the DB yet
+		if($this->idUpdate == 0) {
+			// Insert the update in the DB
 			$req = $bdd->prepare('INSERT INTO Update(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
 
 			$req->execute(array(
@@ -63,7 +66,9 @@ class Update
 					'idMember'		=> $this->idMember
 					));
 		}
+		// If the update already is in the DB
 		else {
+			// Update the update
 			$req = $bdd->prepare('UPDATE Update SET content = :content, date = :date, service = :service, idMember = :idMember WHERE idUpdate = :idUpdate');
 
 			$req->execute(array(

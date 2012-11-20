@@ -15,21 +15,26 @@ class MembersController extends ActionController
     }
     
     public function signupAction()
-    {
+    {	
+		// If the form hasn't been filled yet
 		$this->message = 'Fill the form to sign up';
-
+		
        	if(isset($_POST['pseudo']) && isset($_POST['password']) && isset($_POST['email']) ) {
+			// If all the fields haven't been filled
 			if($_POST['pseudo'] == null || $_POST['password'] == null || $_POST['email'] == null) {
 				$this->message = 'All fields are mandatory';
 			}
 			else {
+				// Test if the pseudo is available
 				if(Members::isPseudoTaken($_POST['pseudo'])) {
 					$this->message = 'Pseudo already taken, please choose another one';
 				}
+				// Test if the e-mail adress is available
 				else if(Members::isMailTaken($_POST['email'])) {
 					$this->message = 'E-mail already taken, please choose another one';
 				}
 				else {
+					// Create new member with the information given in the form
 					$member = new Member();
 					$member->setPseudo($_POST['pseudo']);
 					$member->setPassword($_POST['password']);
@@ -44,24 +49,31 @@ class MembersController extends ActionController
     
     public function signinAction()
     {
+		// If the form hasn't been filled yet (shouldn't happen)
 		$this->message = 'Fill the form in the header to sign in';
         if(isset($_POST['pseudo']) && isset($_POST['password']) ) {
+			// If all the fields haven't been filled
 			if($_POST['pseudo'] == null || $_POST['password'] == null) {
 				$this->message = 'Pseudo or password missing';
 			}
 			else {
-				if(Members::signin($_POST['pseudo'], $_POST['password']))
+				// If the user is found 
+				if(Members::signin($_POST['pseudo'], $_POST['password'])) {
 				 	$this->message = 'You successfully signed in';
-				else
+					// TODO : session management
+				}
+				else {
 					$this->message = 'Wrong username or password';
+				}
 			}
 		}
     }
     
     public function listAction()
     {
+		// Get an array containing all the members
 		$membersList = Members::getAll();
-
+		// Create an array with the informations to show on the list of members
 		foreach($membersList as $member) {
 			$allMembers[] = array(
 								'pseudo' 	=> $member->getPseudo(),
@@ -70,6 +82,7 @@ class MembersController extends ActionController
 								'website'	=> $member->getWebsite()
 								);
 		}
+		// Make the list available to the view
 		$this->listMembers = $allMembers;
     }
     
