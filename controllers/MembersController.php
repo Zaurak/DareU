@@ -66,6 +66,8 @@ class MembersController extends ActionController
 					$_SESSION['pseudo'] 	= $member->getPseudo();
 					$_SESSION['isAdmin']	= $member->isAdmin();
 					$_SESSION['idMember']	= $member->getId();
+
+					$this->redirect('/profile/edit');
 				}
 				else {
 					$_SESSION['connected'] 	= false;
