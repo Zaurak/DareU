@@ -89,9 +89,17 @@ class Member
 	public function getWebsite() {
 		return $this->website;
 	}
-
+	
 	public function setWebsite($website) {
 		$this->website = $website;
+	}
+
+	public function getDescription() {
+		return $this->desc;
+	}
+
+	public function setDescription($desc) {
+		$this->desc = $desc;
 	}
 
 /*

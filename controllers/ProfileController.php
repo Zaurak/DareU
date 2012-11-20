@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../lightmvc/ActionController.php';
+require_once dirname(__FILE__) . '/../model/Member.php';
 
 class ProfileController extends ActionController
 {
@@ -23,10 +24,22 @@ class ProfileController extends ActionController
 			$this->redirect('/');
 		}
 		else {
-        	// member save
-        	// update save
+			$member = new Member($_SESSION['pseudo']);
+			// Form submitted
+			if(isset($_POST['pseudo'])) {
+				$_SESSION['pseudo'] = $_POST['pseudo'];
+				
+				$member->setPseudo($_POST['pseudo']);
+				$member->setDescription($_POST['description']);
+				$member->setWebsite($_POST['website']);
+
+				$member->save();
+			}
+			$this->pseudo	= $member->getPseudo();
+			$this->desc		= $member->getDescription();
+			$this->website 	= $member->getWebsite();
 		}
-    }
+    }	
     
     /**
      * Add a like  
