@@ -18,8 +18,14 @@ class ProfileController extends ActionController
      */
     public function editAction()
     {
-        // member save
-        // update save
+		// If the user is not logged in
+		if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false) {
+			$this->redirect('/');
+		}
+		else {
+        	// member save
+        	// update save
+		}
     }
     
     /**
@@ -27,9 +33,25 @@ class ProfileController extends ActionController
      */
     public function addAction()
     {
-        // update: save
+		// If the user is not logged in
+		if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false) {
+			$this->redirect('/');
+		}
+		else {
+	        // update: save
+		}
     }
     
+	public function deleteAction() 
+	{
+		// If the user is not logged in
+		if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false) {
+			$this->redirect('/');
+		}
+		else {
+		
+		}
+    }
         
     /**
      * show the profile

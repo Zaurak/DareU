@@ -77,19 +77,28 @@ class MembersController extends ActionController
     
     public function listAction()
     {
-		// Get an array containing all the members
-		$membersList = Members::getAll();
-		// Create an array with the informations to show on the list of members
-		foreach($membersList as $member) {
-			$allMembers[] = array(
-								'pseudo' 	=> $member->getPseudo(),
-								'email'		=> $member->getEmail(),
-								'sex'		=> $member->getSex(),
-								'website'	=> $member->getWebsite()
-								);
+		// If the user is logged in and is admin
+		if(	isset($_SESSION['connected']) 	&& $_SESSION['connected'] == true &&
+			isset($_SESSION['isAdmin']) 	&& $_SESSION['isAdmin'] == true	) 		
+		{
+			// Get an array containing all the members
+			$membersList = Members::getAll();
+			// Create an array with the informations to show on the list of members
+			foreach($membersList as $member) {
+				$allMembers[] = array(
+									'pseudo' 	=> $member->getPseudo(),
+									'email'		=> $member->getEmail(),
+									'sex'		=> $member->getSex(),
+									'website'	=> $member->getWebsite()
+									);
+			}
+			// Make the list available to the view
+			$this->listMembers = $allMembers;
 		}
-		// Make the list available to the view
-		$this->listMembers = $allMembers;
+		else
+		{
+			$this->redirect('/');
+		}
     }
     
 	public function logoutAction()
@@ -104,7 +113,16 @@ class MembersController extends ActionController
 
     public function deleteAction()
     {  
-       // use members: delete 
+		// If the user is logged in and is admin
+		if(	isset($_SESSION['connected']) 	&& $_SESSION['connected'] == true &&
+			isset($_SESSION['isAdmin']) 	&& $_SESSION['isAdmin'] == true	) 		
+		{
+       		// use members: delete 
+		}
+		else
+		{
+			$this->redirect('/');
+		}	
     }
 
 
