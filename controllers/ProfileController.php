@@ -13,7 +13,6 @@ class ProfileController extends ActionController
         // Do nothing
     }
     
-    
     /**
      *  Edit the profile of the logged member
      */
