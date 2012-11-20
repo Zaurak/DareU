@@ -60,9 +60,15 @@ class MembersController extends ActionController
 				// If the user is found 
 				if(Members::signin($_POST['pseudo'], $_POST['password'])) {
 				 	$this->message = 'You successfully signed in';
-					// TODO : session management
+					$member = new Member($_POST['pseudo']);
+					
+					$_SESSION['connected'] 	= true;
+					$_SESSION['pseudo'] 	= $member->getPseudo();
+					$_SESSION['isAdmin']	= $member->isAdmin();
+					$_SESSION['idMember']	= $member->getId();
 				}
 				else {
+					$_SESSION['connected'] 	= false;
 					$this->message = 'Wrong username or password';
 				}
 			}
@@ -86,6 +92,16 @@ class MembersController extends ActionController
 		$this->listMembers = $allMembers;
     }
     
+	public function logoutAction()
+	{
+		// If the user is logged, destroy the session variables and redirect to the homepage
+		if(isset($_SESSION['connected'])) {
+			unset($_SESSION['connected']);
+			session_destroy();
+			$this->redirect("/");
+		}
+	}
+
     public function deleteAction()
     {  
        // use members: delete 

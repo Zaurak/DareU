@@ -49,6 +49,10 @@ class Member
 			$answer->closeCursor();
 		}
     }
+	
+	public function getId() {
+		return $this->idMember;
+	}
 
 	public function getPseudo() {
 		return $this->pseudo;

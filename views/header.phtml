@@ -11,20 +11,33 @@
 	
 	<h2> Dare and get known ! </h2>
 		<?php 
-		// Si l'utilisateur est connecté : afficher quelques informations (pseudo, lien vers 'mon profil', deconnexion...)
+		// If the user is logged, display personnal informations
+		if (isset($_SESSION['connected']) && $_SESSION['connected'] == true)
+		{
 		?>
-		
+		<p>
+			<?php echo $_SESSION['pseudo']; ?>
+			<br />
+			<a href="">My profile</a>
+			<a href="/members/logout">Log out</a>
+		</p>
 		<?php
-		// Sinon : champ de connexion (Pseudo - Mot de passe) + lien d'inscription
+		}
+		// If the user is not logged, display log in form and a link to the sign up page
+		else
+		{
 		?>
-	<div id="LogBanner">
-	<form method="post" action="/members/signin">
-		<label for="pseudo">Username :</label>
-		<input type="text" name="pseudo" id="pseudo" /> 
-		<label for="password">Password :</label>
-		<input type="password" name="password" id="password" />
-		<input type="submit" value="Login" />
-	</form>
-	<a href="/members/signup">Create Account</a>
-	</div>
+			<div id="LogBanner">
+			<form method="post" action="/members/signin">
+				<label for="pseudo">Username :</label>
+				<input type="text" name="pseudo" id="pseudo" /> 
+				<label for="password">Password :</label>
+				<input type="password" name="password" id="password" />
+				<input type="submit" value="Login" />
+			</form>
+			<a href="/members/signup">Create Account</a>
+			</div>
+		<?php
+		}
+		?>
 </div>
