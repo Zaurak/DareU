@@ -155,8 +155,8 @@ class Members
 		}
 		// Select the appropriate request
 		if($number > 0) {
-			$answer = $bdd->prepare('SELECT pseudo FROM Member LIMIT ?');
-			$answer->execute($number);
+			$answer = $bdd->prepare('SELECT pseudo FROM Member ORDER BY idMember DESC LIMIT ' . $number);
+			$answer->execute(/*array($number)*/);
 		}		
 		else {
 			$answer = $bdd->prepare('SELECT pseudo FROM Member');
@@ -168,7 +168,6 @@ class Members
 			$allMembers[] = new Member($data['pseudo']);
 		}
 		$answer->closeCursor();
-
 		return $allMembers;
     }
     
@@ -189,7 +188,7 @@ class Members
 			}
 			// Delete the member from the id given
 			$req = $bdd->prepare('DELETE FROM Member WHERE idMember = ?');
-			$req->execute($idMember);
+			$req->execute(array($idMember));
 
 			$req->closeCursor();
 		}
