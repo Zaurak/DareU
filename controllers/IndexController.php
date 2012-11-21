@@ -17,13 +17,13 @@ class IndexController extends ActionController
 	{
 		$this->_includeTemplate = false; 	// to hide footer & header
 	    $result = Members::getAll(10);		// Get the last 10 members
-
+		
 		$rss = '<?xml version="1.0" encoding="UTF-8" ?>
 				<rss version="2.0">
 				<channel>
 			       <title>New members !</title>
 				   <description>Here are the 10 newest members of dareu.com !</description>
-				   <pubDate>'.date_default_timezone_set('Europe/Paris').'</pubDate>';
+				   <pubDate>'.date(DATE_RSS).'</pubDate>';
 
 		foreach($result as $r)
 		{

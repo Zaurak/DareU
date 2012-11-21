@@ -101,7 +101,7 @@ class Member
 	public function setDescription($desc) {
 		$this->desc = $desc;
 	}
-
+	
 /*
     Save the member into the database. If the id property is null, create a new member
     If not, just update it

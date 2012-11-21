@@ -42,6 +42,8 @@ class MembersController extends ActionController
 					$member->setSex($_POST['sex']);
 					$member->save();
 					$this->message = 'Welcome aboard !';
+					$this->createSession($member);
+					$this->redirect('/profile/edit');
 				}
 			}
 		}
@@ -62,11 +64,8 @@ class MembersController extends ActionController
 				 	$this->message = 'You successfully signed in';
 					$member = new Member($_POST['pseudo']);
 					
-					$_SESSION['connected'] 	= true;
-					$_SESSION['pseudo'] 	= $member->getPseudo();
-					$_SESSION['isAdmin']	= $member->isAdmin();
-					$_SESSION['idMember']	= $member->getId();
-
+					$this->createSession($member);
+					
 					$this->redirect('/profile/edit');
 				}
 				else {
@@ -77,6 +76,14 @@ class MembersController extends ActionController
 		}
     }
     
+	private function createSession($member)
+	{
+		$_SESSION['connected'] 	= true;
+		$_SESSION['pseudo'] 	= $member->getPseudo();
+		$_SESSION['isAdmin']	= $member->isAdmin();
+		$_SESSION['idMember']	= $member->getId();		
+	}
+
     public function listAction()
     {
 		// If the user is logged in and is admin
