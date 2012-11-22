@@ -7,34 +7,43 @@
 	<link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-	<div class="navbar navbar-fixed-top">
-		<a class ="brand" href='/'>DareU</a>
-		<ul class="nav pull-right">
-		<?php 
-		// If the user is logged, display personnal informations
-		if (isset($_SESSION['connected']) && $_SESSION['connected'] == true)
-		{
-		?>
-			<li class="navbar-text"><?php echo $_SESSION['pseudo']; ?></li>
-			<li><a href="/profile/edit">Edit my profile</a></li>
-			<li><a href="/members/logout">Log out</a></li>
-		<?php
-		}
-		// If the user is not logged, display log in form and a link to the sign up page
-		else
-		{
-		?>
-		<li><form class="form-inline navbar-form pull-left" method="post" action="/members/signin">
-				<label for="pseudo">Username :</label>
-				<input type="text" name="pseudo" id="pseudo" class="span2" /> 
-				<label for="password">Password :</label>
-				<input type="password" name="password" id="password" class="span2" />
-				<button type="submit" class="btn btn-primary">Log In</button>
-			</form>
-		</li>
-			<li><a href="/members/signup">Create Account</a></li>
-		<?php
-		}
-		?>
-		</ul>
-</div>
+	<header>
+		<div class="navbar navbar-static-top">
+			<a class ="brand" href='/'>DareU</a>
+			<ul class="nav pull-right">
+			<?php 
+			// If the user is logged, display personnal informations
+			if (isset($_SESSION['connected']) && $_SESSION['connected'] == true)
+			{
+				if($_SESSION['isAdmin'])
+				{
+			?>
+					<li><a href="/members/list">Members administration</a></li>
+				<?php
+				}
+				?>
+	
+				<li><a href="/profile"><?php echo $_SESSION['pseudo']; ?></a></li>
+				<li><a href="/profile/edit">Edit my profile</a></li>
+				<li><a href="/members/logout">Log out</a></li>
+			<?php
+			}
+			// If the user is not logged, display log in form and a link to the sign up page
+			else
+			{
+			?>
+			<li><form class="form-inline navbar-form pull-left" method="post" action="/members/signin">
+					<label for="pseudo">Username :</label>
+					<input type="text" name="pseudo" id="pseudo" class="span2" /> 
+					<label for="password">Password :</label>
+					<input type="password" name="password" id="password" class="span2" />
+					<button type="submit" class="btn">Log In</button>
+				</form>
+			</li>
+				<li><a href="/members/signup">Create Account</a></li>
+			<?php
+			}
+			?>
+			</ul>
+	</div>
+</header>
