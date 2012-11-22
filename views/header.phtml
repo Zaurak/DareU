@@ -36,13 +36,18 @@
 					else
 					{
 					?>
-					<li><form class="form-inline navbar-form pull-left" method="post" action="/members/signin">
-							<label for="pseudo">Username :</label>
-							<input type="text" name="pseudo" id="pseudo" class="span2" /> 
-							<label for="password">Password :</label>
-							<input type="password" name="password" id="password" class="span2" />
-							<button type="submit" class="btn">Log In</button>
-						</form>
+			        <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">Log In<b class="caret"></b> </a>
+						<ul class="dropdown-menu">
+							<li>
+								<form class="form-dropdown" method="post" action="/members/signin">
+									<label for="pseudo">Username :</label>
+									<input type="text" name="pseudo" id="pseudo" /> 
+									<label for="password">Password :</label>
+									<input type="password" name="password" id="password" />
+									<button type="submit" class="btn pull-right">Log In</button>
+								</form>
+							</li>
+						</ul>
 					</li>
 						<li><a href="/members/signup">Create Account</a></li>
 					<?php
