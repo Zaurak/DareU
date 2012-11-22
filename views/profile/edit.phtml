@@ -1,19 +1,24 @@
 <h1>Edit my profile</h1>
-<form method="post" action="/profile/edit">
-	<table>
-		<tr>
-			<td><label for="pseudo">Nickname:</label></td>
-			<td><input type="text" name="pseudo" id="pseudo" value="<?php echo $pseudo; ?>" size="45" maxlength="30" autofocus required /></td>
-		</tr>
-		<tr>
-    		<td><label for="description">Description:</label></td>
-			<td><textarea name="description" id="description" rows="5" cols="50"><?php echo $desc; ?></textarea></td>
-		</tr>
-	    <tr>
-			<td><label for="website">Website:</label></td>
-			<td><input type="text" name="website" id="website" value="<?php echo $website; ?>" size="45" maxlength="30"/></td>
-		</tr>
-	</table>
-	
-	<input type="submit" value="Send" />
+<form method="post" action="/profile/edit" class="form-horizontal">
+	<div class="control-group">
+		<label class="control-label" for="pseudo">Nickname:</label>
+		<div class="controls">
+			<input type="text" name="pseudo" id="pseudo" value="<?php echo $pseudo; ?>" size="45" maxlength="30" autofocus required />
+		</div>
+	</div>
+		
+	<div class="control-group">
+    	<label class="control-label" for="description">Description:</label>
+		<div class="controls">
+			<textarea name="description" id="description" rows="5" cols="50"><?php echo $desc; ?></textarea>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label" for="website">Website:</label>
+		<div class="controls">
+			<input type="text" name="website" id="website" value="<?php echo $website; ?>" size="45" maxlength="30"/>
+		</div>
+		<button type="submit" class="btn btn-primary">Send</button>
+	</div>
 </form>
