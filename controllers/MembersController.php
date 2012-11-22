@@ -126,7 +126,11 @@ class MembersController extends ActionController
 		if(	isset($_SESSION['connected']) 	&& $_SESSION['connected'] == true &&
 			isset($_SESSION['isAdmin']) 	&& $_SESSION['isAdmin'] == true	) 		
 		{
-       		// use members: delete 
+       		if(isset($_GET['pseudo'])) 
+			{
+				$this->member = new Member($_GET['pseudo']);
+				Members::delete($this->member->getId());
+			}
 		}
 		else
 		{

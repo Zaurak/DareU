@@ -6,7 +6,7 @@
 		<th>E-mail</th>
 		<th>Sex</th>
 		<th>Website</th>
-		</tr>";
+		<th>Delete member</th></tr>";
 
    	foreach($listMembers As $member) {
 					
@@ -21,6 +21,8 @@
 			echo 'Female';
 		echo "</td><td>";
 		echo '<a href="' . $member['website'] . '">' . $member['website'] . '</a>';
+		echo "</td><td>";
+		echo '<a href="/members/delete?pseudo=' . $member['pseudo'] . '">Delete</a>';
 		echo "</td>\n";
 	}
 	echo "</table>";
