@@ -1,15 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<title>Title of the page</title>
+	<title>Title of the page</title>
+
+	<link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<div id="header">
+	<div id="header">
 		<a href='/'><img src="img/logo.png" alt="logo" /></a>
 	
-	<h2> Dare and get known ! </h2>
+		<h2> Dare and get known ! </h2>
 		<?php 
 		// If the user is logged, display personnal informations
 		if (isset($_SESSION['connected']) && $_SESSION['connected'] == true)
