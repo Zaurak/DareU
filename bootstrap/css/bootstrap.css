@@ -118,7 +118,7 @@ input {
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  padding: 0;
+  padding: 10;
   border: 0;
 }
 button,
@@ -149,9 +149,6 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
-}
-section {
-  padding-top: 40px;
 }
 a {
   color: #0088cc;
@@ -3262,7 +3259,7 @@ input[type="submit"].btn.btn-mini {
 .navbar {
   overflow: visible;
   margin-bottom: 20px;
-  color: #777777;
+  color: #000000;
   *position: relative;
   *z-index: 2;
 }

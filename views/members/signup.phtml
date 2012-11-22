@@ -1,7 +1,7 @@
 <section>
 <h1>sign up</h1>
 	<p>	<?php echo $message; ?> </p>
-   	 <form method="post" action="" class="form-horizontal">
+   	 <form method="post" action="" class="form-horizontal well span6">
 		
 			<div class="control-group">
 			    <label class="control-label" for="pseudo">Nickname:</label>
@@ -13,14 +13,14 @@
 			<div class="control-group">
 		    	<label class="control-label" for="email">Mail:</label>
 				<div class="controls">
-					<input type="email" name="email" id="email" placeholder="Ex : organizer@gmail.com" size="45" maxlength="30" />
+					<input type="email" name="email" id="email" placeholder="Ex : organizer@gmail.com" size="45" maxlength="30" required />
 				</div>
 			</div>
 		    
 			<div class="control-group">
 				<label class="control-label" for="password">Password:</label>
 				<div class="controls">
-					<input type="password" name="password" id="password" placeholder="Ex : bAZKbfernbJFbe" size="45" maxlength="30" />
+					<input type="password" name="password" id="password" placeholder="Ex : bAZKbfernbJFbe" size="45" maxlength="30" required />
 				</div>
 			</div>
 		
@@ -35,6 +35,7 @@
 			</div>
 			<div class="controls">
 			<button type="submit" class="btn btn-primary">Sign up</button>
+			<button class="btn">Clear</button>
 			</div>
 	</form>
 </section>
