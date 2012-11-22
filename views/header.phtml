@@ -7,37 +7,32 @@
 	<link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-	<div id="header">
-		<a href='/'><img src="img/logo.png" alt="logo" /></a>
-	
-		<h2> Dare and get known ! </h2>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<a class ="brand" href='/'>DareU</a>
+		<ul class="nav pull-right">
 		<?php 
 		// If the user is logged, display personnal informations
 		if (isset($_SESSION['connected']) && $_SESSION['connected'] == true)
 		{
 		?>
-		<p>
-			<?php echo $_SESSION['pseudo']; ?>
-			<br />
-			<a href="/profile/edit">Edit my profile</a>
-			<a href="/members/logout">Log out</a>
-		</p>
+			<li class="navbar-text"><?php echo $_SESSION['pseudo']; ?></li>
+			<li><a href="/profile/edit">Edit my profile</a></li>
+			<li><a href="/members/logout">Log out</a></li>
 		<?php
 		}
 		// If the user is not logged, display log in form and a link to the sign up page
 		else
 		{
 		?>
-			<div id="LogBanner">
-			<form method="post" action="/members/signin">
+		<li><form class="form-inline navbar-form pull-left" method="post" action="/members/signin">
 				<label for="pseudo">Username :</label>
-				<input type="text" name="pseudo" id="pseudo" /> 
+				<input type="text" name="pseudo" id="pseudo" class="span2" /> 
 				<label for="password">Password :</label>
-				<input type="password" name="password" id="password" />
-				<input type="submit" value="Login" />
+				<input type="password" name="password" id="password" class="span2" />
+				<button type="submit" class="btn">Log In</button>
 			</form>
-			<a href="/members/signup">Create Account</a>
-			</div>
+		</li>
+			<li><a href="/members/signup">Create Account</a></li>
 		<?php
 		}
 		?>
