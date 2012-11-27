@@ -12,7 +12,10 @@ class IndexController extends ActionController
     { 
 		$this->frontProfiles = Members::getFrontProfiles();
     }
-    
+	
+	/**
+	 * Create rss content with informations about the 10 last members
+	 */
 	public function rssAction() 
 	{
 		$this->_includeTemplate = false; 	// to hide footer & header
@@ -24,7 +27,7 @@ class IndexController extends ActionController
 			       <title>New members !</title>
 				   <description>Here are the 10 newest members of dareu.com !</description>
 				   <pubDate>'.date(DATE_RSS).'</pubDate>';
-
+		// Get informations about the members
 		foreach($result as $r)
 		{
 			$rss = $rss.'<item>

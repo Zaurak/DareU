@@ -61,7 +61,8 @@ class MembersController extends ActionController
 			else {
 				// If the user is found 
 				if(Members::signin($_POST['username'], $_POST['password'])) {
-				 	$this->message = 'You successfully signed in';
+				 	// Create the session for the member
+					$this->message = 'You successfully signed in';
 					$member = new Member($_POST['username']);
 					
 					$this->createSession($member);
@@ -76,6 +77,9 @@ class MembersController extends ActionController
 		}
     }
     
+	/**
+	 * Create session for the member given in argument
+	 */
 	private function createSession($member)
 	{
 		$_SESSION['connected'] 	= true;
@@ -83,7 +87,10 @@ class MembersController extends ActionController
 		$_SESSION['isAdmin']	= $member->isAdmin();
 		$_SESSION['idMember']	= $member->getId();		
 	}
-
+	
+	/**
+	 * Get the datas for all members
+	 */
     public function listAction()
     {
 		// If the user is logged in and is admin
@@ -110,6 +117,9 @@ class MembersController extends ActionController
 		}
     }
     
+	/**
+	 * Destroy the session to log out 
+	 */
 	public function logoutAction()
 	{
 		// If the user is logged, destroy the session variables and redirect to the homepage
@@ -119,7 +129,10 @@ class MembersController extends ActionController
 			$this->redirect("/");
 		}
 	}
-
+	
+	/**
+	 * Delete a member given in the url (Only if the user is admin)
+	 */
     public function deleteAction()
     {  
 		// If the user is logged in and is admin

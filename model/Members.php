@@ -156,7 +156,7 @@ class Members
 		// Select the appropriate request
 		if($number > 0) {
 			$answer = $bdd->prepare('SELECT username FROM Member ORDER BY idMember DESC LIMIT ' . $number);
-			$answer->execute(/*array($number)*/);
+			$answer->execute(/*array($number)*/); // Doesn't work for unknown reason (with ? in the request)
 		}		
 		else {
 			$answer = $bdd->prepare('SELECT username FROM Member');
