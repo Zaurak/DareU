@@ -29,9 +29,12 @@ class IndexController extends ActionController
 		{
 			$rss = $rss.'<item>
 							<title>' . $r->getPseudo() . '</title>
-							<description>' . $r->getDescription() . '</description>
-							<link>' . $r->getWebsite() . '</link>
-						</item>';
+							<description>' . $r->getDescription() . '</description>';
+			
+			if($r->getWebsite() != null)
+				$rss = $rss.'<link>http://' . $r->getWebsite() . '</link>';
+
+			$rss = $rss.'</item>';
 		}
 
 		$rss = $rss.'</channel></rss>';
