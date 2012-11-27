@@ -5,6 +5,7 @@
 	<title>DareU</title>
 
 	<link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+	<script src="../../script/script.js"></script>
 </head>
 <body>
 	<header>
@@ -44,7 +45,7 @@
 									<input type="text" name="pseudo" id="pseudo" /> 
 									<label for="password">Password :</label>
 									<input type="password" name="password" id="password" />
-									<button type="submit" class="btn pull-right">Log In</button>
+									<button type="submit" value="submit" onclick="return validateSignInForm()"  class="btn pull-right">Log In</button>
 								</form>
 							</li>
 						</ul>

@@ -1,4 +1,26 @@
 <section>
 <h1>Sign In</h1>
 <p><?php echo $message; ?></p>
+<form method="post" action="" class="form-horizontal well span6">
+		
+			<div class="control-group">
+			    <label class="control-label" for="pseudo">Nickname:</label>
+				<div class="controls">
+					<input type="text" name="pseudo" id="pseudo" size="45" maxlength="30" autofocus required />
+				</div>
+			</div>
+		    
+			<div class="control-group">
+				<label class="control-label" for="password">Password:</label>
+				<div class="controls">
+					<input type="password" name="password" id="password" size="45" maxlength="30" required />
+				</div>
+			</div>
+
+			<div class="controls">
+			<button type="submit" class="btn btn-primary" onsubmit="return validateSignInForm();">Sign up</button>
+			</div>
+	</form>
+
+
 </section>
