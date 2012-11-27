@@ -23,18 +23,18 @@ class ProfileController extends ActionController
 			$this->redirect('/');
 		}
 		else {
-			$member = new Member($_SESSION['pseudo']);
+			$member = new Member($_SESSION['username']);
 			// Form submitted
-			if(isset($_POST['pseudo'])) {
-				$_SESSION['pseudo'] = $_POST['pseudo'];
+			if(isset($_POST['username'])) {
+				$_SESSION['username'] = $_POST['username'];
 				
-				$member->setPseudo($_POST['pseudo']);
+				$member->setUserName($_POST['username']);
 				$member->setDescription($_POST['description']);
 				$member->setWebsite($_POST['website']);
 
 				$member->save();
 			}
-			$this->pseudo	= $member->getPseudo();
+			$this->username	= $member->getUserName();
 			$this->desc		= $member->getDescription();
 			$this->website 	= $member->getWebsite();
 		}

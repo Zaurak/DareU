@@ -28,7 +28,7 @@
 						}
 						?>
 			
-						<li><a href="/profile"><?php echo $_SESSION['pseudo']; ?></a></li>
+						<li><a href="/profile"><?php echo $_SESSION['username']; ?></a></li>
 						<li><a href="/profile/edit">Edit my profile</a></li>
 						<li><a href="/members/logout">Log out</a></li>
 					<?php
@@ -41,8 +41,8 @@
 						<ul class="dropdown-menu">
 							<li>
 								<form class="form-dropdown" method="post" action="/members/signin">
-									<label for="pseudo">Username :</label>
-									<input type="text" name="pseudo" id="pseudo" /> 
+									<label for="username">Username :</label>
+									<input type="text" name="username" id="username" /> 
 									<label for="password">Password :</label>
 									<input type="password" name="password" id="password" />
 									<button type="submit" value="submit" onclick="return validateSignInForm()"  class="btn pull-right">Log In</button>

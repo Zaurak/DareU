@@ -3,7 +3,7 @@ require_once ('config.php');
 class Member
 {
 	private $idMember 	= 0;
-	private $pseudo;
+	private $username;
 	private $email;
 	private $password;
 	private $sex;
@@ -13,12 +13,12 @@ class Member
 	private $website 	= '';
 	
     /*
-    If the pseudo is not null, get the data from database and fill the properties
-    If the pseudo is null, do nothing
+    If the username is not null, get the data from database and fill the properties
+    If the username is null, do nothing
     */
-    public function __construct($pseudo = NULL) 
+    public function __construct($username = NULL) 
 	{
-		if($pseudo != NULL)
+		if($username != NULL)
 		{
 			// Connexion to the DB
 			$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
@@ -30,14 +30,14 @@ class Member
 				exit();
 			}
 			// Get the member information from his user name
-			$answer = $bdd->prepare('SELECT * FROM Member WHERE pseudo = :pseudo');
+			$answer = $bdd->prepare('SELECT * FROM Member WHERE username = :username');
 
-			$answer->execute(array('pseudo' => $pseudo));
+			$answer->execute(array('username' => $username));
 			
 			if($data = $answer->fetch()) {
 
 				$this->idMember 	=	$data['idMember'];
-				$this->pseudo		=	$data['pseudo'];
+				$this->username		=	$data['username'];
 				$this->email		=	$data['email'];
 				$this->password		=	$data['password'];
 				$this->sex			=	$data['sex'];
@@ -54,12 +54,12 @@ class Member
 		return $this->idMember;
 	}
 
-	public function getPseudo() {
-		return $this->pseudo;
+	public function getUserName() {
+		return $this->username;
 	}
 
-	public function setPseudo($pseudo) {
-		$this->pseudo = $pseudo;
+	public function setUserName($username) {
+		$this->username = $username;
 	}
 
 	public function getEmail() {
@@ -120,10 +120,10 @@ class Member
 		// If the member hasn't been saved yet
 		if($this->idMember == 0) {
 			// Insert the current member in the DB 
-			$req = $bdd->prepare('INSERT INTO Member(pseudo, email, password, sex, isAdmin, description, image, website) VALUES (:pseudo, :email, :password, :sex, :isAdmin, :description, :image, :website)');	
+			$req = $bdd->prepare('INSERT INTO Member(username, email, password, sex, isAdmin, description, image, website) VALUES (:username, :email, :password, :sex, :isAdmin, :description, :image, :website)');	
 
 			$req->execute(array(
-					'pseudo'		=> $this->pseudo,
+					'username'		=> $this->username,
 					'email'			=> $this->email,
 					'password'		=> $this->password,
 					'sex'			=> $this->sex,
@@ -136,10 +136,10 @@ class Member
 		// If the current member already is in the DB
 		else {
 			// Update his informations
-			$req = $bdd->prepare('UPDATE Member SET pseudo = :pseudo, email = :email, password = :password, sex = :sex, isAdmin = :isAdmin, description = :description, image = :image, website = :website WHERE idMember = :idMember');
+			$req = $bdd->prepare('UPDATE Member SET username = :username, email = :email, password = :password, sex = :sex, isAdmin = :isAdmin, description = :description, image = :image, website = :website WHERE idMember = :idMember');
 
 			$req->execute(array(
-					'pseudo'		=> $this->pseudo,
+					'username'		=> $this->username,
 					'email'			=> $this->email,
 					'password'		=> $this->password,
 					'sex'			=> $this->sex,
@@ -157,7 +157,7 @@ class Member
     public function isAdmin()
     {
 		// If the properties are filled
-		if(!empty($this->pseudo))
+		if(!empty($this->username))
 		{
 			return $this->isAdmin;
 		}	

@@ -28,7 +28,7 @@ class IndexController extends ActionController
 		foreach($result as $r)
 		{
 			$rss = $rss.'<item>
-							<title>' . $r->getPseudo() . '</title>
+							<title>' . $r->getUserName() . '</title>
 							<description>' . $r->getDescription() . '</description>';
 			
 			if($r->getWebsite() != null)

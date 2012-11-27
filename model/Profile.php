@@ -30,12 +30,12 @@ class Profile
 		}
 		
 		// Select the member from the given id
-		$answer = $bdd->prepare('SELECT pseudo FROM Member WHERE idMember = ?');
+		$answer = $bdd->prepare('SELECT username FROM Member WHERE idMember = ?');
 		$answer->execute($idMember);
 		
 		if($data = $answer->fetch()) 
 		{
-			$this->member = new Member($data['pseudo']);
+			$this->member = new Member($data['username']);
 		}
 		$answer->closeCursor();
 		

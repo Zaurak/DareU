@@ -3,7 +3,7 @@
 	<?php 
 	   	echo '<table class="table table-hover">';
 		echo "<tr>
-			<th>Pseudo</th>
+			<th>UserName</th>
 			<th>E-mail</th>
 			<th>Sex</th>
 			<th>Website</th>
@@ -12,7 +12,7 @@
 	   	foreach($listMembers As $member) {
 					
 			echo "<tr><td>";
-			echo $member['pseudo'];
+			echo $member['username'];
 			echo "</td><td>";
 			echo '<a href="mailto:' . $member['email'] . '">' . $member['email'] . '</a>';
 			echo "</td><td>";
@@ -23,7 +23,7 @@
 			echo "</td><td>";
 			echo '<a href="' . $member['website'] . '">' . $member['website'] . '</a>';
 			echo "</td><td>";
-			echo '<a href="/members/delete?pseudo=' . $member['pseudo'] . '">Delete</a>';
+			echo '<a href="/members/delete?username=' . $member['username'] . '">Delete</a>';
 			echo "</td>\n";
 		}
 		echo "</table>";

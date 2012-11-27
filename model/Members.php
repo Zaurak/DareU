@@ -7,7 +7,7 @@ class Members
     /*
     * if $mode = true or no arg given, return the last three profiles created
     * if $mode = false, return three random profile
-    * A profile is defined by an array with two keys : image, pseudo
+    * A profile is defined by an array with two keys : image, username
     */
     public static function getFrontProfiles($mode = true)
     {
@@ -23,10 +23,10 @@ class Members
 		
 		// Select the correct request
 		if($mode == true) {
-			$answer = $bdd->prepare('SELECT pseudo, image FROM Member ORDER BY idMember DESC LIMIT 3');
+			$answer = $bdd->prepare('SELECT username, image FROM Member ORDER BY idMember DESC LIMIT 3');
 		}
 		else {
-			$answer = $bdd->prepare('SELECT pseudo, image FROM Member ORDER BY RAND() LIMIT 3');	
+			$answer = $bdd->prepare('SELECT username, image FROM Member ORDER BY RAND() LIMIT 3');	
 		}
 		$answer->execute();
 		
@@ -38,7 +38,7 @@ class Members
 				$data['image'] = 'http://img7.xooimage.com/files/f/c/4/stouffr-holiday-tux-4a156e.png';
 
 			$profiles[] = array(
-						'pseudo'	=> $data['pseudo'],
+						'username'	=> $data['username'],
 						'image'		=> $data['image']
 						);
 		}				
@@ -48,9 +48,9 @@ class Members
 	}
 
 	/*
-	Return true if the pseudo is already taken
+	Return true if the username is already taken
 	*/
-	public static function isPseudoTaken($pseudo) {
+	public static function isUserNameTaken($username) {
 		// Connexion to the DB
        	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 	   	try {
@@ -61,15 +61,15 @@ class Members
 			exit();
 		}
 		
-		// Look for the given pseudo
-		$req = $bdd->prepare('SELECT idMember FROM Member WHERE pseudo = :pseudo');
-		$req->execute(array('pseudo' => $pseudo));
+		// Look for the given username
+		$req = $bdd->prepare('SELECT idMember FROM Member WHERE username = :username');
+		$req->execute(array('username' => $username));
 		// If a match is found return true
 		if($req->fetch()) {
 			$req->closeCursor();
 			return true;
 		}
-		// If the pseudo isn't used, return false
+		// If the username isn't used, return false
 		else {
 			$req->closeCursor();
 			return false;
@@ -121,10 +121,10 @@ class Members
 			exit();
 		}
 		// Check if the combination username/password is in the DB
-	   	$answer = $bdd->prepare('SELECT idMember FROM Member WHERE pseudo = :pseudo AND password = :password');
+	   	$answer = $bdd->prepare('SELECT idMember FROM Member WHERE username = :username AND password = :password');
 
 	   	$answer->execute(array(
-	   						'pseudo' 	=> $username,
+	   						'username' 	=> $username,
 	   						'password'	=> $password
 							));
 		// Return true if the user is found, false if it isn't
@@ -155,17 +155,17 @@ class Members
 		}
 		// Select the appropriate request
 		if($number > 0) {
-			$answer = $bdd->prepare('SELECT pseudo FROM Member ORDER BY idMember DESC LIMIT ' . $number);
+			$answer = $bdd->prepare('SELECT username FROM Member ORDER BY idMember DESC LIMIT ' . $number);
 			$answer->execute(/*array($number)*/);
 		}		
 		else {
-			$answer = $bdd->prepare('SELECT pseudo FROM Member');
+			$answer = $bdd->prepare('SELECT username FROM Member');
 			$answer->execute();
 		}
 		// Create an array with the number of members asked
 		while($data = $answer->fetch())
 		{
-			$allMembers[] = new Member($data['pseudo']);
+			$allMembers[] = new Member($data['username']);
 		}
 		$answer->closeCursor();
 		return $allMembers;
