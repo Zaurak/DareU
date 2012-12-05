@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . '/../lightmvc/ActionController.php';
 require_once dirname(__FILE__) . '/../model/Member.php';
+require_once dirname(__FILE__) . '/../model/Members.php';
 
 class ProfileController extends ActionController
 {
@@ -26,13 +27,19 @@ class ProfileController extends ActionController
 			$member = new Member($_SESSION['username']);
 			// Form submitted
 			if(isset($_POST['username'])) {
-				$_SESSION['username'] = $_POST['username'];
+				if(!Members::isUserNameTaken($_POST['username'])) {
+					$_SESSION['username'] = $_POST['username'];
 				
-				$member->setUserName($_POST['username']);
-				$member->setDescription($_POST['description']);
-				$member->setWebsite($_POST['website']);
+					$member->setUserName($_POST['username']);
+					$member->setDescription($_POST['description']);
+					$member->setWebsite($_POST['website']);
 
-				$member->save();
+					$member->save();
+					$this->message = '';
+				}
+				else {
+					$this->message = 'User Name already taken';
+				}
 			}
 			$this->username	= $member->getUserName();
 			$this->desc		= $member->getDescription();

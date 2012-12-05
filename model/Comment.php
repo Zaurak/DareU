@@ -3,12 +3,12 @@ require_once('config.php');
 class Comment
 {
     // put here the names of fields
-	private $idComment	=	0;    
+	private $idComment			= 0;    
 	private $content;
 	private $date;
 	private $idUpdate;
 	private $idMember;
-       
+ 	
     /*
     Save the update into the database, if the id property is null, create a new comment
     If not, just update it
@@ -28,7 +28,7 @@ class Comment
 		if($this->idComment == 0) {
 			// Create the comment
 			$req = $bdd->prepare('INSERT INTO Comment(content, date, idUpdate, idMember) VALUES(:content, :date, :idUpdate, :idMember)');
-
+			
 			$req->execute(array(
 					'content'		=> $this->content,
 					'date'			=> $this->date,
@@ -40,7 +40,7 @@ class Comment
 		else {
 			// Update it with new values
 			$req = $bdd->prepare('UPDATE Comment SET content = :content, date = :date, idUpdate = :idUpdate, idMember = :idMember WHERE idComment = :idComment');
-
+			
 			$req->execute(array(
 					'content'		=> $this->content,
 					'date'			=> $this->date,
