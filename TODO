@@ -1,0 +1,25 @@
+1- Adapter le site pour DareU
+	- Reseau social 
+		- Relations entre membres 
+			- Recherche de membres
+			- Ajout d'amis
+			- Accepter/Refuser amis
+		- Publication de challenges public, tous les amis, ou a un ami
+		- Publication de réponse au challenge (texte/photo/vidéo)
+	- Noter un challenge (difficulté, fun etc /10 ?)
+	- Noter la réponse
+	- Adapter le rss : 10 derniers défis publiques
+
+2- Adapter le dropdown menu pour le login (--> a faire nous même avec jquery sans bootstrap)
+3- Ajouter notre propre CSS pour tout sauf la navbar
+4- Check des formulaire via javascript (UserName non vide, mot de passe sufisement secure, email valide, tooltip...)
+5- Ajouter la possibilité pour l'utilisateur d'uploader une image de profil
+6- API:
+	- Connexion Facebook + affichage des amis
+		- Invitation des amis a rejoindre le site ?
+	- Interface avec Youtube
+	- Twitter --> partager un défi + récupérer les twit avec le hashtag du défi
+
+BONUS:
+	- MP/mails, autre ?
+	- Compte de points par membres
