@@ -23,8 +23,10 @@
 			echo "</td><td>";
 			echo '<a href="' . $member['website'] . '">' . $member['website'] . '</a>';
 			echo "</td><td>";
-			echo '<a href="/members/delete?username=' . $member['username'] . '">Delete</a>';
-			echo "</td>\n";
+			?>
+			<a href="/members/delete?username=<?php echo $member['username'] ?>" onclick="return confirm('Are you sure to delete this member ?');">Delete</a>
+			</td>
+<?php
 		}
 		echo "</table>";
 		?>
