@@ -155,8 +155,9 @@ class Members
 		}
 		// Select the appropriate request
 		if($number > 0) {
-			$answer = $bdd->prepare('SELECT username FROM Member ORDER BY idMember DESC LIMIT ' . $number);
-			$answer->execute(/*array($number)*/); // Doesn't work for unknown reason (with ? in the request)
+			$answer = $bdd->prepare('SELECT username FROM Member ORDER BY idMember DESC LIMIT :number');
+			$answer->bindParam(':number', $number, PDO::PARAM_INT); // Avoid $number to be considered as a string
+			$answer->execute(); 
 		}		
 		else {
 			$answer = $bdd->prepare('SELECT username FROM Member');

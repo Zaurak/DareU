@@ -1,25 +1,45 @@
-1- Adapter le site pour DareU
-	- Reseau social 
-		- Relations entre membres 
-			- Recherche de membres
-			- Ajout d'amis
-			- Accepter/Refuser amis
-		- Publication de challenges public, tous les amis, ou a un ami
-		- Publication de réponse au challenge (texte/photo/vidéo)
+Par ordre de priorité :
+
+1- Check du formulaire signup (create account) via javascript :  (cf /views/members/signup & /scripts + infos du TP)
+	- necessite peut-etre de dégager une partie de bootstrap sur les pages concernées
+	- necessite d'enlever les spécifications HTML5 (placeholder, required...)
+	- Nickname : required
+	- Mail : required, email form (*@*.*)
+	- password : required, 4 caractères mini, un chiffre mini
+	- Tooltips
+
+2- Ajout du CSS pour l'ensemble du site sauf la navbar :	(création d'un fichier css perso en plus de bootstrap)
+	- adapter bootstrap dans certains cas
+	- from scratch pour d'autres (titres, footer, images...)
+
+3- Permettre l'affichage d'un profil utilisateur avec ses informations (/views/profile/index + profilecontroller et probablement update, a revoir en détail) :
+	- Afficher image de profil et nom du membre
+	- "Mur" interactif :
+		- Affichage d'informations stockées en dur dans la BDD dans un premier temps
+		- Edition et suppression des infos du mur par l'utilisateur
+		- Permettre aux utilisateurs de commenter chaque publication
+
+4- Permettre aux membres d'ajouter une image de profil (/views/profile/edit & editaction dans controller/ProfileControler)
+
+5- Rendre le "Mur" réactif avec AJAX
+
+6- Utilisation d'API :
+	- detecter qu'un utilisateur like une vidéo youtube et l'afficher sur son mur
+
+BONUS:
+
+- Adapter le dropdown menu par nous même via JQuery (se détacher de boostrap)
+- Gérer un systeme d'amis
+- Adapter le site pour DareU (je rêve un peu, détails plus bas)
+- Connexion via Facebook et affichage des amis Facebook
+- Partage d'un défi via twitter
+- MP/Mails
+
+
+--> Adapter le site pour DareU
+	- Publication de challenges public, tous les amis, ou a un ami
+	- Publication de réponse au challenge (texte/photo/vidéo)
 	- Noter un challenge (difficulté, fun etc /10 ?)
 	- Noter la réponse
 	- Adapter le rss : 10 derniers défis publiques
 
-2- Adapter le dropdown menu pour le login (--> a faire nous même avec jquery sans bootstrap)
-3- Ajouter notre propre CSS pour tout sauf la navbar
-4- Check des formulaire via javascript (UserName non vide, mot de passe sufisement secure, email valide, tooltip...)
-5- Ajouter la possibilité pour l'utilisateur d'uploader une image de profil
-6- API:
-	- Connexion Facebook + affichage des amis
-		- Invitation des amis a rejoindre le site ?
-	- Interface avec Youtube
-	- Twitter --> partager un défi + récupérer les twit avec le hashtag du défi
-
-BONUS:
-	- MP/mails, autre ?
-	- Compte de points par membres
