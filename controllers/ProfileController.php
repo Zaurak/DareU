@@ -58,7 +58,27 @@ class ProfileController extends ActionController
 			$this->redirect('/');
 		}
 		else {
-	        // update: save
+	        if(isset($_POST['content']) && $_POST['content'] != null) {
+				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+				try {
+					$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+				}
+				catch(PDOException $e) {
+					echo 'Connexion Failed : ' . $e->getMessage();
+					exit();
+				}
+				// Insert new update
+				$answer = $bdd->prepare('INSERT INTO Updates(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
+				$answer->execute(array(
+									'content'	=>	$_POST['content'],
+									'date'		=>	date('Y-m-d'),
+									'service'	=>  'text',
+									'idMember'	=>	$_SESSION['idMember']
+									)
+								);
+				$answer->closeCursor();
+				$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
+			}
 		}
     }
     

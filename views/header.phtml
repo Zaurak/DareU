@@ -29,7 +29,7 @@
 						}
 						?>
 			
-						<li><a href="/profile"><?php echo $_SESSION['username']; ?></a></li>
+						<li><a href="/profile/view?id=<?php echo $_SESSION['idMember']; ?>"><?php echo $_SESSION['username']; ?></a></li>
 						<li><a href="/profile/edit">Edit my profile</a></li>
 						<li><a href="/members/logout">Log out</a></li>
 					<?php

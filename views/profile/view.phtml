@@ -7,6 +7,17 @@
 <h1>Profile of <?php echo $profile->getMember()->getUserName(); ?></h1>
 
 <?php
+	if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
+		if($_SESSION['idMember'] == $profile->getMember()->getId()) {
+			?>
+			<form method='post' action='/profile/add'>
+				<label for='content'>Status : </label>
+				<textarea name='content' id='content' rows='3' cols='30'></textarea>
+				<input type='submit' value='Submit' />
+			</form>
+			<?php
+		}
+	}
 	if($profile != null && $profile->getUpdates() != null) {
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
