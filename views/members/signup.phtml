@@ -6,21 +6,21 @@
 			<div class="control-group">
 			    <label class="control-label" for="username">Nickname:</label>
 				<div class="controls">
-					<input type="text" name="username" id="username" placeholder="Ex : Toto" size="45" maxlength="30" autofocus required />
+					<input type="text" name="username" id="username" placeholder="Ex : Toto" size="45" maxlength="30" autofocus />
 				</div>
 			</div>
 			
 			<div class="control-group">
 		    	<label class="control-label" for="email">Mail:</label>
 				<div class="controls">
-					<input type="email" name="email" id="email" placeholder="Ex : organizer@gmail.com" size="45" maxlength="30" required />
+					<input type="text" name="email" id="email" placeholder="Ex : organizer@gmail.com" size="45" maxlength="30" />
 				</div>
 			</div>
 		    
 			<div class="control-group">
 				<label class="control-label" for="password">Password:</label>
 				<div class="controls">
-					<input type="password" name="password" id="password" placeholder="Ex : bAZKbfernbJFbe" size="45" maxlength="30" required />
+					<input type="password" name="password" id="password" placeholder="Ex : bAZKbfernbJFbe" size="45" maxlength="30" />
 				</div>
 			</div>
 		
@@ -35,7 +35,7 @@
 			</div>
 			<div class="controls">
 			<button type="submit" class="btn btn-primary" onsubmit="return validateSignUpForm();">Sign up</button>
-			<button class="btn" onclick="this.form.reset();">Clear</button>
+			<button class="btn" onclick="return resetSignupForm();">Clear</button>
 			</div>
 	</form>
 </section>
