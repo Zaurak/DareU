@@ -41,7 +41,7 @@ class Profile
 		$answer->closeCursor();
 		
 		// Select the updates done by the member
-		$answer = $bdd->prepare('SELECT idUpdate FROM Updates WHERE idMember = :id');
+		$answer = $bdd->prepare('SELECT idUpdate FROM Updates WHERE idMember = :id ORDER BY date DESC');
 		$answer->bindParam('id', $idMember, PDO::PARAM_INT);
 		$answer->execute();
 		while($data = $answer->fetch())

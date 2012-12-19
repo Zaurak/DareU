@@ -71,7 +71,7 @@ class ProfileController extends ActionController
 				$answer = $bdd->prepare('INSERT INTO Updates(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
 				$answer->execute(array(
 									'content'	=>	$_POST['content'],
-									'date'		=>	date('Y-m-d'),
+									'date'		=>	date('Y-m-d H-i-s'),
 									'service'	=>  'text',
 									'idMember'	=>	$_SESSION['idMember']
 									)
