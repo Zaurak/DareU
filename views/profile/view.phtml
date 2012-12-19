@@ -5,8 +5,18 @@
 	?>
 
 <h1>Profile of <?php echo $profile->getMember()->getUserName(); ?></h1>
-<p></p>
-</section>
+
+<?php
+	if($profile != null && $profile->getUpdates() != null) {
+		foreach($profile->getUpdates() as $update) {
+			echo '<p>';
+			echo $update->getDate() . '<br />';
+			echo $update->getContent() . '<br />';
+			echo $update->getService() . '<br />';
+			echo '</p>';
+		}
+	}
+?>
 
 <?php
 	}
@@ -18,3 +28,5 @@
 <?php
 	}
 	?>
+
+</section>

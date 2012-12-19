@@ -82,4 +82,16 @@ class Update
 		}
 		$req->closeCursor();    
     }
+
+	public function getContent() {
+		return $this->content;
+	}
+
+	public function getDate() {
+		return $this->date;
+	}
+
+	public function getService() {
+		return $this->service;
+	}
 }
