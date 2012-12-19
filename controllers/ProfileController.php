@@ -3,6 +3,7 @@
 require_once dirname(__FILE__) . '/../lightmvc/ActionController.php';
 require_once dirname(__FILE__) . '/../model/Member.php';
 require_once dirname(__FILE__) . '/../model/Members.php';
+require_once dirname(__FILE__) . '/../model/Profile.php';
 
 class ProfileController extends ActionController
 {
@@ -77,7 +78,9 @@ class ProfileController extends ActionController
      */
     public function viewAction()
     {
-        // use the Profil constructor
+		if(isset($_GET['id']) && $_GET['id'] != null) {
+			$this->profile = new Profile($_GET['id']);	
+		}
     }
     
     

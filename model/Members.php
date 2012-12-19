@@ -171,6 +171,25 @@ class Members
 		$answer->closeCursor();
 		return $allMembers;
     }
+
+	public static function getLastId() 
+	{
+        // Connexion to the DB
+       	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+	   	try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}
+		catch (PDOException $e) {
+			echo 'Connexion failed : ' . $e->getMessage();
+			exit();
+		}
+		$answer = $bdd->prepare('SELECT idMember FROM Member ORDER BY idMember DESC LIMIT 1');
+		$answer->execute();
+
+		$data = $answer->fetch();
+
+		return $data['idMember'];
+	}
     
     /*
     Delete the given member, if $idMember is not empty

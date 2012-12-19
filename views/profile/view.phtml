@@ -1,4 +1,20 @@
 <section>
-<h1>Title</h1>
+<?php
+	if(isset($_GET['id']) && $_GET['id'] != null && $_GET['id'] > 0 && $_GET['id'] < Members::getLastId())
+	{
+	?>
+
+<h1>Profile of <?php echo $profile->getMember()->getUserName(); ?></h1>
 <p></p>
 </section>
+
+<?php
+	}
+	else
+	{
+	?>
+
+<p> No member found </p>
+<?php
+	}
+	?>

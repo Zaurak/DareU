@@ -20,7 +20,7 @@ class Profile
     public function __construct($idMember)
     {
         // Connexion to the DB
-		$pdo_options[PDO::ATTR__ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		try {
 			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
 		}
@@ -30,8 +30,9 @@ class Profile
 		}
 		
 		// Select the member from the given id
-		$answer = $bdd->prepare('SELECT username FROM Member WHERE idMember = ?');
-		$answer->execute($idMember);
+		$answer = $bdd->prepare('SELECT username FROM Member WHERE idMember = :id');
+		$answer->bindParam('id', $idMember, PDO::PARAM_INT);
+		$answer->execute();
 		
 		if($data = $answer->fetch()) 
 		{
@@ -40,13 +41,21 @@ class Profile
 		$answer->closeCursor();
 		
 		// Select the updates done by the member
-		$answer = bdd->prepare('SELECT idUpdate FROM Update WHERE idMember = ?');
-		$answer->execute($idMember);
-
+		$answer = $bdd->prepare('SELECT idUpdate FROM Updates WHERE idMember = :id');
+		$answer->bindParam('id', $idMember, PDO::PARAM_INT);
+		$answer->execute();
 		while($data = $answer->fetch())
 		{
-			$this->updates[] = new Update(data['idUpdate']);	
+			$this->updates[] = new Update($data['idUpdate']);	
 		}
 		$answer->closeCursor();
-    } 
+    }
+
+	public function getMember() {
+		return $this->member;
+	}
+
+	public function getUpdates() {
+		return $this->updates;
+	}
 }

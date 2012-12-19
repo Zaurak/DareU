@@ -26,15 +26,16 @@ class Update
 		}
 		
 		// Select the update from the given id
-		$answer = bdd->prepare('SELECT * FROM Update WHERE idUpdate = ?');
-		$answer->execute($idUpdate);
+		$answer = $bdd->prepare('SELECT * FROM Updates WHERE idUpdate = :id');
+		$answer->bindParam(':id', $idUpdate, PDO::PARAM_INT);
+		$answer->execute();
 		
 		if($data = $answer->fetch()) {
-			$this->idUpdate	= data['idUpdate'];
-			$this->content	= data['content'];
-			$this->date		= data['date'];
-			$this->service	= data['service'];
-			$this->idMember	= data['idMember'];
+			$this->idUpdate	= $data['idUpdate'];
+			$this->content	= $data['content'];
+			$this->date		= $data['date'];
+			$this->service	= $data['service'];
+			$this->idMember	= $data['idMember'];
 		}
 		$answer->closeCursor();
 	}
