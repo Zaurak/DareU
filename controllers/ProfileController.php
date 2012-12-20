@@ -186,10 +186,31 @@ class ProfileController extends ActionController
     {
 		// Only the members can watch each others walls
 		if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
-			if(isset($_GET['id']) && $_GET['id'] != null) {
-				$this->profile = new Profile($_GET['id']);	
-				$member = $this->profile->getMember();
-				$this->xml = Update::getLikes($member->getUserName());	
+			if(isset($_GET['id']) && $_GET['id'] != null && $_GET['id'] > 0 && $_GET['id'] <= Members::getLastId()) {
+				$profile = new Profile($_GET['id']);	
+				$member = $profile->getMember();
+				$xml = Update::getLikes($member->getUserName());
+				if($xml != null) {
+					$lastVimeo = Update :: getLastTimeVimeo($member->getId());
+					if($lastVimeo != null) {
+						foreach($xml as $v) {
+							if($v->liked_on > $lastVimeo) {
+								$content = 	'<a href="' . $v->url . '">' . $v->title . '</a><br />' .
+											'<img src="' . $v->thumbnail_medium . '" /><br />';
+								$update = new Update();
+								$update->setContent($content);
+								$update->setDate($v->liked_on);
+								$update->setService('vimeo');
+								$update->setIdMember($member->getId());
+								$update->save();
+							}
+						}
+					}
+				}
+				$this->profile = new Profile($_GET['id']);
+			}
+			else {
+				$this->redirect('/');
 			}
 		}
 		else {

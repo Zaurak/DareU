@@ -30,8 +30,10 @@ Fait en grande partie !
 
 5- Rendre le "Mur" réactif avec AJAX
 
+Fait en grande partie
 6- Utilisation d'API :
-	- detecter qu'un utilisateur like une vidéo youtube ou vimeo et l'afficher sur son mur
+	- detecter qu'un utilisateur like une vidéo youtube ou vimeo et l'afficher sur son mur // Fait pour vimeo
+	- Afficher les vidéo et les status posté sur le site d'un seul bloc (en respectant la chronologie) // Fait pour vimeo
 
 BONUS:
 

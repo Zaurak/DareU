@@ -26,18 +26,7 @@
 	}
 	// If the member ever posted something
 	if($profile != null && $profile->getUpdates() != null) {
-		// Diplay all his posts
-		
-		// Videos liked on vimeo
-		if($xml != null) {
-			foreach($xml as $v) {
-						echo '<p>';
-						echo '<a href="' . $v->url . '">' . $v->title . '</a><br />';
-						echo '<img src="' . $v->thumbnail_medium . '" /><br />';
-						echo '</p>';
-			}
-		}
-
+		// Display all updates
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
 			echo $update->getDate() . '<br />';
@@ -46,7 +35,9 @@
 				echo $update->getContent() . '<br />';
 			else if($update->getService() == 'image')
 				echo '<img src="'.$update->getContent().'" alt="update_pic" /><br />';
-			
+			else if($update->getService() == 'vimeo')
+				echo $update->getContent();
+
 			echo $update->getService() . '<br />';
 			// If the member connected is the author of the status, display a link to delete his status
 			if($update->getIdMember() == $_SESSION['idMember']) {
