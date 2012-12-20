@@ -20,7 +20,7 @@ class Comment
 			echo 'Connexion Failed : ' . $e->getMessage();
 			exit();
 		}
-			
+		// Get the comment from the id		
 		$answer = $bdd->prepare('SELECT * FROM Comment WHERE idComment = :idComment');
 		$answer->bindParam(':idComment', $idComment, PDO::PARAM_INT);
 		$answer->execute();
@@ -81,6 +81,8 @@ class Comment
 		$req->closeCursor();    
     }
 
+	/*** Setters & Getters ***/
+
 	public function setContent($content) {
 		$this->content = $content;
 	}
@@ -122,8 +124,11 @@ class Comment
 	}
 
 
+	//***  STATIC FUNCTIONS   ***\\
 
-	
+	/*
+	 * Delete a comment from the id
+	 */
 	public static function deleteComment($idComment) {
 		if($idComment != null) {
 			// Connexion to the DB

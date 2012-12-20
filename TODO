@@ -19,9 +19,9 @@ Fait en grande partie !
 	- "Mur" interactif :
 		- Affichage d'informations stockées en dur dans la BDD dans un premier temps  // Fait
 		- Edition des infos du mur par l'utilisateur
-		- Suppression d'un post sur le mur par l'utilisateur
-			- Suppression des commentaires liés
-		- Suppression d'un commentaire par l'auteur
+		- Suppression d'un post sur le mur par l'utilisateur // Fait
+			- Suppression des commentaires liés				// Fait
+		- Suppression d'un commentaire par l'auteur			// Fait
 		- Permettre aux utilisateurs de commenter chaque publication // Fait pour des commentaires texte
 		- Ajout d'images sur son mur	// Fait mais l'image ne s'affiche pas (???)
 		- Ajout d'images dans les commentaires

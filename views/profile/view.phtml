@@ -1,14 +1,18 @@
 <section>
 <?php
+	// Test if the id given in the url is correct
 	if(isset($_GET['id']) && $_GET['id'] != null && $_GET['id'] > 0 && $_GET['id'] < Members::getLastId())
 	{
 	?>
 
 <h1>Profile of <?php echo $profile->getMember()->getUserName(); ?></h1>
 <img src='<?php echo $profile->getMember()->getImage(); ?>' />
+
 <?php
+	// If the connected member is watching his own wall
 	if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
 		if($_SESSION['idMember'] == $profile->getMember()->getId()) {
+			// Display a form to post a new status and/or image
 			?>
 			<form method='post' action='/profile/add' enctype='multipart/form-data'>
 				<label for='content'>Status : </label>
@@ -20,7 +24,9 @@
 			<?php
 		}
 	}
+	// If the member ever posted something
 	if($profile != null && $profile->getUpdates() != null) {
+		// Diplay all his posts
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
 			echo $update->getDate() . '<br />';
@@ -31,22 +37,24 @@
 				echo '<img src="'.$update->getContent().'" alt="update_pic" /><br />';
 			
 			echo $update->getService() . '<br />';
+			// If the member connected is the author of the status, display a link to delete his status
 			if($update->getIdMember() == $_SESSION['idMember']) {
 				echo '<a href="/profile/delete?idUpdate='.$update->getIdUpdate().'">Delete</a>';
 			}
-			
+			// If a status has comments, display them too
 			if($update->getComments() != null) {
 				foreach($update->getComments() as $comment) {
 					echo '<div id="comment">' .
 						 $comment->getDate() . '<br />' .
 						 $comment->getContent() . '<br />';
+					// If the member connected is the author of the comment, display a link to delete his comment
 					if($comment->getIdAuthor() == $_SESSION['idMember']) {
 						echo '<a href="/profile/deleteComment?idComment='.$comment->getIdComment().'">Delete comment</a>';
 					}
 					echo '</div>';
 				}
 			}
-
+			// Comment form
 			echo '<form method="post" action="/profile/comment?idMember=' . $update->getIdMember() . '&idUpdate=' . $update->getIdUpdate() . '">' .
 				 '<textarea name="comment" id="comment" rows="1" cols="30"></textarea>' .
 				 '<input type="submit" value="Comment" />' .

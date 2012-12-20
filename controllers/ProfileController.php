@@ -50,7 +50,7 @@ class ProfileController extends ActionController
     }	
     
     /**
-     * Add a like  
+     * Add an update 
      */
     public function addAction()
     {
@@ -99,7 +99,8 @@ class ProfileController extends ActionController
 		}
 		$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
     }
-
+	
+	// Create a new comment to an update
 	public function commentAction()
 	{
 		// If the user is not logged in
@@ -135,7 +136,10 @@ class ProfileController extends ActionController
 		}
 		
 	}
-
+		
+	/**
+	 * Delete a comment
+	 */
 	public function deleteCommentAction() {
 		if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
 			if(isset($_GET['idComment']) && $_GET['idComment'] != null) {
@@ -152,6 +156,9 @@ class ProfileController extends ActionController
 		}
 	}
     
+	/**
+	 * Delete an update
+	 */
 	public function deleteAction() 
 	{
 		// If the user is not logged in
@@ -177,8 +184,14 @@ class ProfileController extends ActionController
      */
     public function viewAction()
     {
-		if(isset($_GET['id']) && $_GET['id'] != null) {
-			$this->profile = new Profile($_GET['id']);	
+		// Only the members can watch each others walls
+		if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
+			if(isset($_GET['id']) && $_GET['id'] != null) {
+				$this->profile = new Profile($_GET['id']);	
+			}
+		}
+		else {
+			$this->redirect('/');
 		}
     }
     
