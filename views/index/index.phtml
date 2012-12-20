@@ -7,13 +7,16 @@
 			 		echo "<table><tr>";
 			 		foreach($frontProfiles As $member) {
 						echo "<td>";
-				   		echo $member['username'] . '<br />';
-				   		?>
-
+						?>
+						<a href="/profile/view?id=<?php echo $member['idMember']; ?>">
+				   		<?php echo $member['username']; ?>
+						</a>
+				   		<br />
 				   		<img 	src="<?php echo $member['image']; ?>"
 				   				alt="Profile image"
 								class="img-polaroid"
 				  	 	/>
+						</a>
 				   		<br />
 				  
 				  	<?php

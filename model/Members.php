@@ -23,10 +23,10 @@ class Members
 		
 		// Select the correct request
 		if($mode == true) {
-			$answer = $bdd->prepare('SELECT username, image FROM Member ORDER BY idMember DESC LIMIT 3');
+			$answer = $bdd->prepare('SELECT idMember, username, image FROM Member ORDER BY idMember DESC LIMIT 3');
 		}
 		else {
-			$answer = $bdd->prepare('SELECT username, image FROM Member ORDER BY RAND() LIMIT 3');	
+			$answer = $bdd->prepare('SELECT idMember, username, image FROM Member ORDER BY RAND() LIMIT 3');	
 		}
 		$answer->execute();
 		
@@ -38,6 +38,7 @@ class Members
 				$data['image'] = 'http://img7.xooimage.com/files/f/c/4/stouffr-holiday-tux-4a156e.png';
 
 			$profiles[] = array(
+						'idMember'	=> $data['idMember'],
 						'username'	=> $data['username'],
 						'image'		=> $data['image']
 						);
