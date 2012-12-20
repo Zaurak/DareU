@@ -116,6 +116,7 @@ class ProfileController extends ActionController
 						$comment->setDate(date('Y-m-d H-i-s'));
 						$comment->setIdUpdate($_GET['idUpdate']);
 						$comment->setIdMember($_GET['idMember']);
+						$comment->setIdAuthor($_SESSION['idMember']);
 
 						$comment->save();
 						$this->redirect('/profile/view?id=' . $_GET['idMember']);
@@ -133,6 +134,22 @@ class ProfileController extends ActionController
 			}
 		}
 		
+	}
+
+	public function deleteCommentAction() {
+		if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
+			if(isset($_GET['idComment']) && $_GET['idComment'] != null) {
+				$comment = new Comment($_GET['idComment']);
+				$id = $comment->getIdMember();
+				if($comment->getIdAuthor() == $_SESSION['idMember']) {
+					Comment::deleteComment($comment->getIdComment());
+					$this->redirect('/profile/view?id='.$id);
+				}
+			}
+		}
+		else {
+			$this->redirect('/');
+		}
 	}
     
 	public function deleteAction() 

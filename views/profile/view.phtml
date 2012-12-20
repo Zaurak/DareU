@@ -36,8 +36,11 @@
 				foreach($update->getComments() as $comment) {
 					echo '<div id="comment">' .
 						 $comment->getDate() . '<br />' .
-						 $comment->getContent() . '<br />' .
-						 '</div>';
+						 $comment->getContent() . '<br />';
+					if($comment->getIdAuthor() == $_SESSION['idMember']) {
+						echo '<a href="/profile/deleteComment?idComment='.$comment->getIdComment().'">Delete comment</a>';
+					}
+					echo '</div>';
 				}
 			}
 
