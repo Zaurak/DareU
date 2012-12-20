@@ -1,7 +1,7 @@
 <section>
 <?php
 	// Test if the id given in the url is correct
-	if(isset($_GET['id']) && $_GET['id'] != null && $_GET['id'] > 0 && $_GET['id'] < Members::getLastId())
+	if(isset($_GET['id']) && $_GET['id'] != null && $_GET['id'] > 0 && $_GET['id'] <= Members::getLastId())
 	{
 	?>
 
@@ -27,6 +27,17 @@
 	// If the member ever posted something
 	if($profile != null && $profile->getUpdates() != null) {
 		// Diplay all his posts
+		
+		// Videos liked on vimeo
+		if($xml != null) {
+			foreach($xml as $v) {
+						echo '<p>';
+						echo '<a href="' . $v->url . '">' . $v->title . '</a><br />';
+						echo '<img src="' . $v->thumbnail_medium . '" /><br />';
+						echo '</p>';
+			}
+		}
+
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
 			echo $update->getDate() . '<br />';

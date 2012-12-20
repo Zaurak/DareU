@@ -136,6 +136,8 @@ class Member
 					'image'			=> $this->image, 
 					'website'		=> $this->website
 					));
+			
+
 		}
 		// If the current member already is in the DB
 		else {

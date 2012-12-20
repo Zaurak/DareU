@@ -188,6 +188,8 @@ class ProfileController extends ActionController
 		if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
 			if(isset($_GET['id']) && $_GET['id'] != null) {
 				$this->profile = new Profile($_GET['id']);	
+				$member = $this->profile->getMember();
+				$this->xml = Update::getLikes($member->getUserName());	
 			}
 		}
 		else {
