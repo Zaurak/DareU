@@ -14,7 +14,7 @@ class Update
 	Update constructor
 	Fill the fields from a given id
 	*/
-	public function __construct($idUpdate)
+	public function __construct($idUpdate = -1)
 	{
 		// Connexion to the DB
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;

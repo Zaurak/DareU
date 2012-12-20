@@ -17,11 +17,13 @@ Fait en grande partie !
 3- Permettre l'affichage d'un profil utilisateur avec ses informations (/views/profile/index + profilecontroller et probablement update, a revoir en détail) :
 	- Afficher image de profil et nom du membre // Fait
 	- "Mur" interactif :
-		- Affichage d'informations stockées en dur dans la BDD dans un premier temps  // Fait - pour du texte
-		- Edition et suppression des infos du mur par l'utilisateur	 // En cours
+		- Affichage d'informations stockées en dur dans la BDD dans un premier temps  // Fait
+		- Edition des infos du mur par l'utilisateur
+		- Suppression d'un post sur le mur par l'utilisateur
+			- Suppression des commentaires liés
+		- Suppression d'un commentaire par l'auteur
 		- Permettre aux utilisateurs de commenter chaque publication // Fait pour des commentaires texte
-
-
+		- Ajout d'images sur le mur (post & commentaire) // En cours
 
 4- Permettre aux membres d'ajouter une image de profil (/views/profile/edit & editaction dans controller/ProfileControler)
 
