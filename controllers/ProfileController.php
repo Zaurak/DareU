@@ -4,6 +4,7 @@ require_once dirname(__FILE__) . '/../lightmvc/ActionController.php';
 require_once dirname(__FILE__) . '/../model/Member.php';
 require_once dirname(__FILE__) . '/../model/Members.php';
 require_once dirname(__FILE__) . '/../model/Profile.php';
+require_once dirname(__FILE__) . '/../model/Comment.php';
 
 class ProfileController extends ActionController
 {
@@ -59,28 +60,53 @@ class ProfileController extends ActionController
 		}
 		else {
 	        if(isset($_POST['content']) && $_POST['content'] != null) {
-				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-				try {
-					$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
-				}
-				catch(PDOException $e) {
-					echo 'Connexion Failed : ' . $e->getMessage();
-					exit();
-				}
 				// Insert new update
-				$answer = $bdd->prepare('INSERT INTO Updates(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
-				$answer->execute(array(
-									'content'	=>	$_POST['content'],
-									'date'		=>	date('Y-m-d H-i-s'),
-									'service'	=>  'text',
-									'idMember'	=>	$_SESSION['idMember']
-									)
-								);
-				$answer->closeCursor();
+				$update = new Update();
+				$update->setContent($_POST['content']);
+				$update->setDate(date('Y-m-d H-i-s'));
+				$update->setService('text');
+				$update->setIdMember($_SESSION['idMember']);
+
+				$update->save();
 				$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
 			}
 		}
     }
+
+	public function commentAction()
+	{
+		// If the user is not logged in
+		if(!isset($_SESSION['connected']) || $_SESSION['connected'] == false) {
+			$this->redirect('/');
+		}
+		else {
+			if(isset($_GET['idMember']) && isset($_GET['idUpdate'])) {
+				if($_GET['idMember'] != null && $_GET['idUpdate'] != null) {
+	        		if(isset($_POST['comment']) && $_POST['comment'] != null) {
+
+						$comment = new Comment();
+						$comment->setContent($_SESSION['username'] . ' : ' . $_POST['comment']);
+						$comment->setDate(date('Y-m-d H-i-s'));
+						$comment->setIdUpdate($_GET['idUpdate']);
+						$comment->setIdMember($_GET['idMember']);
+
+						$comment->save();
+						$this->redirect('/profile/view?id=' . $_GET['idMember']);
+					}
+					else {
+						$this->message = 'Post';
+					}
+				}
+				else {
+						$this->message .= ' null';
+				}
+			}
+			else {
+			}
+				$this->message .= ' Get';
+		}
+		
+	}
     
 	public function deleteAction() 
 	{

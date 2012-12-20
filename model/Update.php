@@ -3,11 +3,12 @@ require_once('config.php');
 class Update 
 {
     // put here the names of fields
-	public $idUpdate 	= 0;
-	public $content;
-	public $date;
-	public $service;
-	public $idMember;
+	private $idUpdate 	= 0;
+	private $content;
+	private $date;
+	private $service;
+	private $idMember;
+	private $comments;
 
 	/* 
 	Update constructor
@@ -38,6 +39,17 @@ class Update
 			$this->idMember	= $data['idMember'];
 		}
 		$answer->closeCursor();
+	
+		$answer = $bdd->prepare('SELECT idComment FROM Comment WHERE idUpdate = :idUpdate AND idMember = :idMember ORDER BY date');
+		$answer->execute(array(
+								'idUpdate' => $this->idUpdate,
+								'idMember' => $this->idMember
+								)
+						);
+		while($data = $answer->fetch()) {
+			$this->comments[] = new Comment($data['idComment']);
+		}
+		$answer->closeCursor();
 	}
 
     /*
@@ -58,7 +70,7 @@ class Update
 		// If the update hasn't been saved in the DB yet
 		if($this->idUpdate == 0) {
 			// Insert the update in the DB
-			$req = $bdd->prepare('INSERT INTO Update(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
+			$req = $bdd->prepare('INSERT INTO Updates(content, date, service, idMember) VALUES(:content, :date, :service, :idMember)');
 
 			$req->execute(array(
 					'content'		=> $this->content,
@@ -70,7 +82,7 @@ class Update
 		// If the update already is in the DB
 		else {
 			// Update the update
-			$req = $bdd->prepare('UPDATE Update SET content = :content, date = :date, service = :service, idMember = :idMember WHERE idUpdate = :idUpdate');
+			$req = $bdd->prepare('UPDATE Updates SET content = :content, date = :date, service = :service, idMember = :idMember WHERE idUpdate = :idUpdate');
 
 			$req->execute(array(
 					'content'		=> $this->content,
@@ -82,16 +94,44 @@ class Update
 		}
 		$req->closeCursor();    
     }
+	
+	public function getIdUpdate() {
+		return $this->idUpdate;
+	}
 
 	public function getContent() {
 		return $this->content;
+	}
+
+	public function setContent($content) {
+		$this->content = $content;
 	}
 
 	public function getDate() {
 		return $this->date;
 	}
 
+	public function setDate($date) {
+		$this->date = $date;
+	}
+
 	public function getService() {
 		return $this->service;
+	}
+
+	public function setService($service) {
+		$this->service = $service;
+	}
+
+	public function setIdMember($idMember) {
+		$this->idMember = $idMember;
+	}
+
+	public function getIdMember() {
+		return $this->idMember;
+	}
+
+	public function getComments() {
+		return $this->comments;
 	}
 }

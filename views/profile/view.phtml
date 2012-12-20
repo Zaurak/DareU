@@ -21,9 +21,24 @@
 	if($profile != null && $profile->getUpdates() != null) {
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
+			echo $update->getIdUpdate() . '<br />';
 			echo $update->getDate() . '<br />';
 			echo $update->getContent() . '<br />';
 			echo $update->getService() . '<br />';
+			
+			if($update->getComments() != null) {
+				foreach($update->getComments() as $comment) {
+					echo '<div id="comment">' .
+						 $comment->getDate() . '<br />' .
+						 $comment->getContent() . '<br />' .
+						 '</div>';
+				}
+			}
+
+			echo '<form method="post" action="/profile/comment?idMember=' . $update->getIdMember() . '&idUpdate=' . $update->getIdUpdate() . '">' .
+				 '<textarea name="comment" id="comment" rows="1" cols="30"></textarea>' .
+				 '<input type="submit" value="Comment" />' .
+				 '</form>';
 			echo '</p>';
 		}
 	}
