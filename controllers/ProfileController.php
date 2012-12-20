@@ -159,7 +159,16 @@ class ProfileController extends ActionController
 			$this->redirect('/');
 		}
 		else {
-		
+			if(isset($_GET['idUpdate']) && $_GET['idUpdate'] != null) {
+				$update = new Update($_GET['idUpdate']);
+				if($update->getIdMember() == $_SESSION['idMember']) {
+					foreach($update->getComments() as $comment) {
+						Comment::deleteComment($comment->getIdComment());
+					}
+					Update::deleteUpdate($update->getIdUpdate());
+					$this->redirect('/profile/view?id='.$_SESSION['idMember']);
+				}
+			}
 		}
     }
         

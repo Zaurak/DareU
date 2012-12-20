@@ -31,6 +31,9 @@
 				echo '<img src="'.$update->getContent().'" alt="update_pic" /><br />';
 			
 			echo $update->getService() . '<br />';
+			if($update->getIdMember() == $_SESSION['idMember']) {
+				echo '<a href="/profile/delete?idUpdate='.$update->getIdUpdate().'">Delete</a>';
+			}
 			
 			if($update->getComments() != null) {
 				foreach($update->getComments() as $comment) {

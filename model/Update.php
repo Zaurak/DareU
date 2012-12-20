@@ -134,4 +134,22 @@ class Update
 	public function getComments() {
 		return $this->comments;
 	}
+
+
+	static public function deleteUpdate($idUpdate) {
+        // Connexion to the DB
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		try {
+			$bdd = new PDO(DSN, DB_USERNAME, DB_PASSWORD, $pdo_options);
+		}
+		catch(PDOException $e) {
+			echo 'Connexion Failed : ' . $e->getMessage();
+			exit();
+		}
+
+		$req = $bdd->prepare('DELETE FROM Updates WHERE idUpdate = ?');
+		$req->execute(array($idUpdate));
+		$req->closeCursor();
+	}
+
 }
