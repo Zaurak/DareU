@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2012 at 05:19 AM
+-- Generation Time: Dec 20, 2012 at 06:36 AM
 -- Server version: 5.5.28
 -- PHP Version: 5.4.9
 
@@ -32,21 +32,19 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `date` datetime NOT NULL,
   `idUpdate` int(11) NOT NULL,
   `idMember` int(11) NOT NULL,
+  `idAuthor` int(11) NOT NULL,
   PRIMARY KEY (`idComment`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `Comment`
 --
 
-INSERT INTO `Comment` (`idComment`, `content`, `date`, `idUpdate`, `idMember`) VALUES
-(1, 'j', '2012-12-20 02:52:06', 95, 22),
-(2, 'bien d''accord', '2012-12-20 02:53:41', 95, 22),
-(3, 'HÃ©hÃ©', '2012-12-20 02:53:57', 111, 113),
-(4, 'a : Toi mÃªme !', '2012-12-20 02:56:01', 111, 113),
-(5, 'a : Prout', '2012-12-20 02:56:22', 11, 22),
-(6, 'a : Mince on voit qui je suis', '2012-12-20 02:56:29', 11, 22),
-(7, 'coucou : Moi aussi !', '2012-12-20 03:13:09', 112, 113);
+INSERT INTO `Comment` (`idComment`, `content`, `date`, `idUpdate`, `idMember`, `idAuthor`) VALUES
+(15, 'a : et quatre', '2012-12-20 06:09:58', 130, 114, 113),
+(17, 'coucou : 5-6-7 :p', '2012-12-20 06:10:41', 131, 114, 114),
+(18, 'a : aah', '2012-12-20 06:26:40', 123, 113, 113),
+(19, 'a : aaaaa', '2012-12-20 06:26:46', 123, 113, 113);
 
 -- --------------------------------------------------------
 
@@ -189,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `Updates` (
   `service` varchar(128) NOT NULL,
   `idMember` int(11) NOT NULL,
   PRIMARY KEY (`idUpdate`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=132 ;
 
 --
 -- Dumping data for table `Updates`
@@ -318,13 +316,10 @@ INSERT INTO `Updates` (`idUpdate`, `content`, `date`, `service`, `idMember`) VAL
 (120, 'ez', '2012-12-20 04:06:50', 'text', 113),
 (121, 'ez', '2012-12-20 04:07:02', 'text', 113),
 (122, 'ez', '2012-12-20 04:07:24', 'text', 113),
-(123, 'ez', '2012-12-20 04:07:40', 'text', 113),
 (124, 'az', '2012-12-20 04:08:39', 'text', 113),
 (125, 'couc', '2012-12-20 04:18:29', 'text', 113),
-(126, '/var/www/html/controllers/../img/update/GitHub.jpg', '2012-12-20 04:58:10', 'image', 113),
-(127, 'Bouh', '2012-12-20 05:02:09', 'text', 113),
-(128, '/var/www/html/controllers/img/update/MyScript.jpg', '2012-12-20 05:02:09', 'image', 113),
-(129, '/var/www/html/controllers/../img/update/LaTeX_badside.png', '2012-12-20 05:06:11', 'image', 113);
+(130, 'et un', '2012-12-20 06:09:13', 'text', 114),
+(131, 'et deux', '2012-12-20 06:09:20', 'text', 114);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
