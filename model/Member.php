@@ -101,6 +101,10 @@ class Member
 	public function setDescription($desc) {
 		$this->desc = $desc;
 	}
+
+	public function getImage() {
+		return $this->image;
+	}
 	
 /*
     Save the member into the database. If the id property is null, create a new member

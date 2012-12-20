@@ -12,19 +12,23 @@ Par ordre de priorité :
 	- adapter bootstrap dans certains cas
 	- from scratch pour d'autres (titres, footer, images...)
 
+
+Fait en grande partie !
 3- Permettre l'affichage d'un profil utilisateur avec ses informations (/views/profile/index + profilecontroller et probablement update, a revoir en détail) :
-	- Afficher image de profil et nom du membre
+	- Afficher image de profil et nom du membre // Fait
 	- "Mur" interactif :
-		- Affichage d'informations stockées en dur dans la BDD dans un premier temps
-		- Edition et suppression des infos du mur par l'utilisateur
-		- Permettre aux utilisateurs de commenter chaque publication
+		- Affichage d'informations stockées en dur dans la BDD dans un premier temps  // Fait - pour du texte
+		- Edition et suppression des infos du mur par l'utilisateur	 // En cours
+		- Permettre aux utilisateurs de commenter chaque publication // Fait pour des commentaires texte
+
+
 
 4- Permettre aux membres d'ajouter une image de profil (/views/profile/edit & editaction dans controller/ProfileControler)
 
 5- Rendre le "Mur" réactif avec AJAX
 
 6- Utilisation d'API :
-	- detecter qu'un utilisateur like une vidéo youtube et l'afficher sur son mur
+	- detecter qu'un utilisateur like une vidéo youtube ou vimeo et l'afficher sur son mur
 
 BONUS:
 

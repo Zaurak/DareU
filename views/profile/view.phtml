@@ -5,7 +5,7 @@
 	?>
 
 <h1>Profile of <?php echo $profile->getMember()->getUserName(); ?></h1>
-
+<img src='<?php echo $profile->getMember()->getImage(); ?>' />
 <?php
 	if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
 		if($_SESSION['idMember'] == $profile->getMember()->getId()) {
@@ -21,7 +21,6 @@
 	if($profile != null && $profile->getUpdates() != null) {
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
-			echo $update->getIdUpdate() . '<br />';
 			echo $update->getDate() . '<br />';
 			echo $update->getContent() . '<br />';
 			echo $update->getService() . '<br />';
