@@ -82,7 +82,7 @@ class ProfileController extends ActionController
 					if(move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../img/update/'.$_FILES['image']['name'])) {
 						// Insert new update
 						$update = new Update();
-						$update->setContent('/img/update/'.$_FILES['image']['name']);
+						$update->setContent('<img src="/img/update/'.$_FILES['image']['name'].'" alt="update_pic" />');
 						$update->setDate(date('Y-m-d H-i-s'));
 						$update->setService('image');
 						$update->setIdMember($_SESSION['idMember']);
@@ -91,14 +91,8 @@ class ProfileController extends ActionController
 					}
 				}
 			}
-			else {
-				if(!isset($_FILES['image']))
-					$this->message = 'no image';
-				if($_FILES['image']['error'] > 0)
-					$this->message = 'error';
-			}
 		}
-//		$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
+		$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
     }
 	
 	// Create a new comment to an update
@@ -221,10 +215,14 @@ class ProfileController extends ActionController
 
 	public function updateAction()
 	{
-		$this->_includeTemplate = false;
-		$lastUpdateDisplayed = '2012-12-20 04:06:50';
-		$idMember = '113';
-		$this->updates = Update::getAll($lastUpdateDisplayed, $idMember);
+		// If the necessary datas are received
+		if(	isset($_POST['idMember']) && isset($_POST['lastUpdate']) && 
+			$_POST['idMember'] != null && $_POST['lastUpdate'] != null) {	
+			// Don't display header & footer as the result is to be diplayed in another page
+			$this->_includeTemplate = false;
+			// get the updates made after the last displayed update and send them to the view
+			$this->updates = Update::getAll($_POST['lastUpdate'], $_POST['idMember']);
+		}
 	}
     
     

@@ -30,18 +30,13 @@
 	}
 	// If the member ever posted something
 	if($profile != null && $profile->getUpdates() != null) {
+		echo '<div id="lastUpdate" style="display:none">' . $profile->getUpdates()[0]->getDate() . '</div>';
+		echo '<div id="idMember" style="display:none">' . $profile->getMember()->getId() . '</div>'; 
 		// Display all updates
 		foreach($profile->getUpdates() as $update) {
 			echo '<p>';
 			echo $update->getDate() . '<br />';
-			
-			if($update->getService() == 'text')
-				echo $update->getContent() . '<br />';
-			else if($update->getService() == 'image')
-				echo '<img src="'.$update->getContent().'" alt="update_pic" /><br />';
-			else if($update->getService() == 'vimeo')
-				echo $update->getContent();
-
+			echo $update->getContent() . '<br />';
 			echo $update->getService() . '<br />';
 			// If the member connected is the author of the status, display a link to delete his status
 			if($update->getIdMember() == $_SESSION['idMember']) {
@@ -68,17 +63,14 @@
 			echo '</p>';
 		}
 	}
-?>
-
-<?php
-	}
-	else
-	{
+}
+else
+{
 	?>
 
 <p> No member found </p>
 <?php
-	}
+}
 	?>
 
 </section>

@@ -8,7 +8,7 @@
 	<script src="../../script/script.js"></script>
 	<script>
 		function updateWall() {
-			$("#update").load("/profile/update");
+			$("#update").load("/profile/update", { lastUpdate:document.getElementById('lastUpdate').innerHTML, idMember:document.getElementById('idMember').innerHTML } );
 		}
 	</script>
 	<link rel="alternate" type="application/rss+xml" href="/index/rss"> 
