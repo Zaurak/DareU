@@ -4,12 +4,17 @@ function validateSignInForm() {
 
 
 function validateSignUpForm() {
-	alert('Pouet');
 	return (checkName() && checkEmail() && checkPassword());
 }
 
+function resetSignupForm() {
+    document.getElementById('username').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('password').value = "";
+}
+
 function checkName() {
-	var name = document.getElementById('username');
+	var nickname = document.getElementById('username');
 
 	if(nickname.value == '' || nickname.value.length <= 4) {
 		// Nickname is required and must be at least 4 characters long

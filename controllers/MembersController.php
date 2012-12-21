@@ -33,6 +33,11 @@ class MembersController extends ActionController
 				else if(Members::isMailTaken($_POST['email'])) {
 					$this->message = 'E-mail already taken, please choose another one';
 				}
+				else if (strlen($_POST['username']) <= 4  || 
+					!preg_match("#^[a-z0-9_\.\-]+@[a-z0-9_\.\-]+\.[a-z0-9]{2,4}$#i", $_POST['email']) ||
+					strlen($_POST['password']) < 4) {
+				    $this->message = 'Please, allow javascript to check your input first, you have one or several wrong inputs...';
+				}
 				else {
 					// Create new member with the information given in the form
 					$member = new Member();
