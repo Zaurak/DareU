@@ -5,6 +5,7 @@ require_once dirname(__FILE__) . '/../model/Member.php';
 require_once dirname(__FILE__) . '/../model/Members.php';
 require_once dirname(__FILE__) . '/../model/Profile.php';
 require_once dirname(__FILE__) . '/../model/Comment.php';
+require_once dirname(__FILE__) . '/../model/Update.php';
 
 class ProfileController extends ActionController
 {
@@ -217,6 +218,14 @@ class ProfileController extends ActionController
 			$this->redirect('/');
 		}
     }
+
+	public function updateAction()
+	{
+		$this->_includeTemplate = false;
+		$lastUpdateDisplayed = '2012-12-20 04:06:50';
+		$idMember = '113';
+		$this->updates = Update::getAll($lastUpdateDisplayed, $idMember);
+	}
     
     
 }

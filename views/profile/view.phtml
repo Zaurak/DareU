@@ -23,6 +23,10 @@
 			</form>
 			<?php
 		}
+		else {
+			echo '<button type="button" onclick="updateWall()">Update Wall</button>';
+			echo '<div id="update"></div>';
+		}
 	}
 	// If the member ever posted something
 	if($profile != null && $profile->getUpdates() != null) {

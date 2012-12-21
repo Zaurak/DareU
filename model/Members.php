@@ -165,6 +165,7 @@ class Members
 			$answer->execute();
 		}
 		// Create an array with the number of members asked
+		$allMembers = null;
 		while($data = $answer->fetch())
 		{
 			$allMembers[] = new Member($data['username']);
