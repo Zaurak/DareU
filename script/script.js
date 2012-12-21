@@ -43,6 +43,9 @@ function checkEmail() {
 
 function checkPassword() {
 	var password = document.getElementById('password');
+	
+	return true;
+
 	if(password.value == '' || password.value.length < 4) {
 		password.style.color = 'red';
 		return false;
