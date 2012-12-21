@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2012 at 06:36 AM
+-- Generation Time: Dec 21, 2012 at 11:07 PM
 -- Server version: 5.5.28
 -- PHP Version: 5.4.9
 
@@ -34,17 +34,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `idMember` int(11) NOT NULL,
   `idAuthor` int(11) NOT NULL,
   PRIMARY KEY (`idComment`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
-
---
--- Dumping data for table `Comment`
---
-
-INSERT INTO `Comment` (`idComment`, `content`, `date`, `idUpdate`, `idMember`, `idAuthor`) VALUES
-(15, 'a : et quatre', '2012-12-20 06:09:58', 130, 114, 113),
-(17, 'coucou : 5-6-7 :p', '2012-12-20 06:10:41', 131, 114, 114),
-(18, 'a : aah', '2012-12-20 06:26:40', 123, 113, 113),
-(19, 'a : aaaaa', '2012-12-20 06:26:46', 123, 113, 113);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 -- --------------------------------------------------------
 
@@ -63,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Member` (
   `image` varchar(256) NOT NULL,
   `website` varchar(256) NOT NULL,
   PRIMARY KEY (`idMember`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=119 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
 -- Dumping data for table `Member`
@@ -164,15 +154,7 @@ INSERT INTO `Member` (`idMember`, `username`, `email`, `password`, `sex`, `isAdm
 (97, 'Fusce', 'lorem.semper@scelerisquemollis.com', 'HJZ65GTG0SA', 0, 1, 'Nullam\r\n enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo.\r\n Praesent luctus. Curabitur egestas nunc', '', ''),
 (98, 'odio.', 'nisi.Aenean.eget@nasceturridiculus.edu', 'ULV44KSA4BH', 0, 1, 'semper\r\n et, lacinia vitae, sodales at, velit. Pellentesque ultricies dignissim \r\nlacus. Aliquam rutrum lorem ac risus. Morbi metus. Vivamus', '', ''),
 (99, 'quam', 'et.magna.Praesent@faucibus.org', 'UPL33KKZ0NU', 0, 1, 'tincidunt\r\n vehicula risus. Nulla eget metus', '', ''),
-(100, 'dolor.', 'tincidunt.vehicula.risus@magna.com', 'BBG43YAQ3QK', 0, 1, 'Proin\r\n vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula \r\nconsectetuer rhoncus. Nullam', '', ''),
-(111, 'Pouet', 'pouet@pouet', 'pouet', 1, 0, 'No description', '', ''),
-(112, 'Toto', 'toto@toto', 'toto', 0, 0, 'No description', '', ''),
-(113, 'a', 'a@a', 'a', 0, 1, 'Coucou, je m''appelle "A" !', '', 'www.a.fr'),
-(114, 'coucou', 'coucou@coucou', 'coucou', 1, 0, 'je suis coucou', '', 'www.google.com'),
-(115, 'Tata', 'tata@tata', 'tata', 1, 0, 'No description', '', ''),
-(116, 'ezfds', 'zefd', 'zef', 1, 0, 'No description', '', ''),
-(117, 'az', 'az', 'az', 1, 0, 'No description', '', ''),
-(118, 'zed', 'azedqs', 'zadqs', 1, 0, 'No description', '', '');
+(100, 'dolor.', 'tincidunt.vehicula.risus@magna.com', 'BBG43YAQ3QK', 0, 1, 'Proin\r\n vel arcu eu odio tristique pharetra. Quisque ac libero nec ligula \r\nconsectetuer rhoncus. Nullam', '', '');
 
 -- --------------------------------------------------------
 
@@ -187,16 +169,13 @@ CREATE TABLE IF NOT EXISTS `Updates` (
   `service` varchar(128) NOT NULL,
   `idMember` int(11) NOT NULL,
   PRIMARY KEY (`idUpdate`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=132 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=175 ;
 
 --
 -- Dumping data for table `Updates`
 --
 
 INSERT INTO `Updates` (`idUpdate`, `content`, `date`, `service`, `idMember`) VALUES
-(1, 'mollis nec, cursus a, enim.', '0000-00-00 00:00:00', 'flickr', 34),
-(2, 'egestas. Aliquam', '0000-00-00 00:00:00', 'gmap', 7),
-(3, 'euismod urna. Nullam lobortis quam a felis \r\nullamcorper', '0000-00-00 00:00:00', 'gmap', 20),
 (4, 'semper \r\ncursus. Integer mollis. Integer', '0000-00-00 00:00:00', 'youtube', 25),
 (5, 'venenatis lacus. Etiam bibendum fermentum metus. Aenean \r\nsed', '0000-00-00 00:00:00', 'flickr', 50),
 (6, 'tellus lorem', '0000-00-00 00:00:00', 'gmap', 29),
@@ -293,33 +272,7 @@ INSERT INTO `Updates` (`idUpdate`, `content`, `date`, `service`, `idMember`) VAL
 (97, 'Curabitur dictum. Phasellus in felis. Nulla \r\ntempor', '0000-00-00 00:00:00', 'youtube', 21),
 (98, 'luctus.\r\n Curabitur', '0000-00-00 00:00:00', 'youtube', 4),
 (99, 'morbi \r\ntristique senectus et netus', '0000-00-00 00:00:00', 'flickr', 44),
-(100, 'feugiat non, lobortis quis, pede.', '0000-00-00 00:00:00', 'youtube', 33),
-(101, 'Coucou', '0000-00-00 00:00:00', 'text', 3),
-(102, 'comment que Ã§a va ?', '0000-00-00 00:00:00', 'text', 3),
-(103, 'hey !', '2012-12-20 00:00:00', 'text', 3),
-(104, 'Niarf', '2012-12-20 00:00:00', 'text', 113),
-(105, 'coucou', '2012-12-20 00:00:00', 'text', 113),
-(106, 'ezad', '2012-12-20 00:00:00', 'text', 113),
-(107, 'coucou', '2012-12-20 00:00:00', 'text', 113),
-(108, 'hahaha', '2012-12-20 00:00:00', 'text', 113),
-(109, 'huehuehue', '2012-12-20 00:42:01', 'text', 113),
-(110, 'Hey it seems to work', '2012-12-20 00:43:26', 'text', 113),
-(111, 'yo', '2012-12-20 01:21:16', 'text', 113),
-(112, 'J''ai faim', '2012-12-20 03:12:20', 'text', 113),
-(113, 'pouet', '2012-12-20 03:38:09', 'text', 113),
-(114, 'ppe', '2012-12-20 03:55:21', 'text', 113),
-(115, 'ppe2', '2012-12-20 04:03:24', 'text', 113),
-(116, 'ze', '2012-12-20 04:05:17', 'text', 113),
-(117, 'ez', '2012-12-20 04:05:38', 'text', 113),
-(118, 'ez', '2012-12-20 04:06:21', 'text', 113),
-(119, 'ez', '2012-12-20 04:06:37', 'text', 113),
-(120, 'ez', '2012-12-20 04:06:50', 'text', 113),
-(121, 'ez', '2012-12-20 04:07:02', 'text', 113),
-(122, 'ez', '2012-12-20 04:07:24', 'text', 113),
-(124, 'az', '2012-12-20 04:08:39', 'text', 113),
-(125, 'couc', '2012-12-20 04:18:29', 'text', 113),
-(130, 'et un', '2012-12-20 06:09:13', 'text', 114),
-(131, 'et deux', '2012-12-20 06:09:20', 'text', 114);
+(100, 'feugiat non, lobortis quis, pede.', '0000-00-00 00:00:00', 'youtube', 33);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
