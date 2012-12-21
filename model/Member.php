@@ -138,7 +138,7 @@ class Member
 					));
 			// Update the idMember attribute
 			$req->closeCursor;
-			$req->prepare('SELECT idMember From Member WHERE username = ?');
+			$req = $bdd->prepare('SELECT idMember From Member WHERE username = ?');
 			$req->execute(array($this->username));
 			$data = $req->fetch();
 			$this->idMember = $data['idMember'];
