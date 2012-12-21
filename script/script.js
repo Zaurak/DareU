@@ -2,6 +2,11 @@ function validateSignInForm() {
 	// TODO
 }
 
+
+function updateWall() {
+	$("#update").load("/profile/update", { lastUpdate:document.getElementById('lastUpdate').innerHTML, idMember:document.getElementById('idMember').innerHTML } );
+}
+
 /*
 function validateSignUpForm() {
 	return (checkName() && checkEmail() && checkPassword());
