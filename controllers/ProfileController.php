@@ -82,7 +82,7 @@ class ProfileController extends ActionController
 					if(move_uploaded_file($_FILES['image']['tmp_name'], dirname(__FILE__).'/../img/update/'.$_FILES['image']['name'])) {
 						// Insert new update
 						$update = new Update();
-						$update->setContent(dirname(__FILE__).'/../img/update/'.$_FILES['image']['name']);
+						$update->setContent('/img/update/'.$_FILES['image']['name']);
 						$update->setDate(date('Y-m-d H-i-s'));
 						$update->setService('image');
 						$update->setIdMember($_SESSION['idMember']);
@@ -98,7 +98,7 @@ class ProfileController extends ActionController
 					$this->message = 'error';
 			}
 		}
-		$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
+//		$this->redirect('/profile/view?id=' . $_SESSION['idMember']);
     }
 	
 	// Create a new comment to an update
