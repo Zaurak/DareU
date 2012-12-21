@@ -146,8 +146,9 @@ class MembersController extends ActionController
 		{
        		if(isset($_GET['username'])) 
 			{
-				$this->member = new Member($_GET['username']);
-				Members::delete($this->member->getId());
+				$member = new Member($_GET['username']);
+				Members::delete($member->getId());
+				$this->username = $member->getUserName();
 			}
 		}
 		else

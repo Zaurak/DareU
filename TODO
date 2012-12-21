@@ -23,11 +23,12 @@ Fait en grande partie !
 			- Suppression des commentaires liés				// Fait
 		- Suppression d'un commentaire par l'auteur			// Fait
 		- Permettre aux utilisateurs de commenter chaque publication // Fait pour des commentaires texte
-		- Ajout d'images sur son mur	// Fait mais l'image ne s'affiche pas (???)
+		- Ajout d'images sur son mur	// Fait mais l'image ne s'affiche pas --> probleme de droit d'accès
 		- Ajout d'images dans les commentaires
 
 4- Permettre aux membres d'ajouter une image de profil (/views/profile/edit & editaction dans controller/ProfileControler)
 
+Fait : il reste a mettre la fonction js dans le bon fichier
 5- Rendre le "Mur" réactif avec AJAX
 
 Fait en grande partie

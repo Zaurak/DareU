@@ -174,6 +174,36 @@ class ProfileController extends ActionController
 		}
     }
         
+	private function getUpdateArray($getUpdates) {
+	$up = null;
+			if($getUpdates != null) {
+				$up = array();
+				foreach($getUpdates as $update) {
+					$up[] = array(
+					 			'date' 		=> $update->getDate(),
+								'content' 	=> $update->getContent(),
+								'service'	=> $update->getService(),
+								'idMember'  => $update->getIdMember(),
+								'idUpdate'	=> $update->getIdUpdate(),
+								'comment'	=> null
+								);
+														
+					if($update->getComments() != null) {
+						$up[count($up)-1]['comment'] = array();
+						foreach($update->getComments() as $comment) {
+							$up[count($up)-1]['comment'][] = array( 
+															'date'		=> $comment->getDate(),
+															'content'	=> $comment->getContent(),
+															'idAuthor' 	=> $comment->getIdAuthor(),
+															'idComment' => $comment->getIdComment()
+															);
+						}
+					}
+				}
+			}
+		return $up;
+	}
+
     /**
      * show the profile
      */
@@ -202,7 +232,25 @@ class ProfileController extends ActionController
 						}
 					}
 				}
-				$this->profile = new Profile($_GET['id']);
+				$prof = new Profile($_GET['id']);
+
+				$retProfile = array(
+							'member'  => null,
+							'updates' => null
+							);
+
+				if($prof->getMember() != null) {
+					$retProfile['member'] = array(
+									'username' => $prof->getMember()->getUserName(),
+									'image' => $prof->getMember()->getImage(),
+									'idMember' => $prof->getMember()->getId()
+									);				
+				}
+				if($prof->getUpdates() != null) {
+					$retProfile['updates'] = $this->getUpdateArray($prof->getUpdates());
+				}
+				$this->profile = $retProfile;
+
 			}
 			else {
 				$this->redirect('/');
@@ -219,9 +267,12 @@ class ProfileController extends ActionController
 		if(	isset($_POST['idMember']) && isset($_POST['lastUpdate']) && 
 			$_POST['idMember'] != null && $_POST['lastUpdate'] != null) {	
 			// Don't display header & footer as the result is to be diplayed in another page
-			$this->_includeTemplate = false;
+				$this->_includeTemplate = false;
 			// get the updates made after the last displayed update and send them to the view
-			$this->updates = Update::getAll($_POST['lastUpdate'], $_POST['idMember']);
+			$getUpdates = Update::getAll($_POST['lastUpdate'], $_POST['idMember']);
+			if($getUpdates != null) {
+				$this->updates = $this->getUpdateArray($getUpdates);
+			}
 		}
 	}
     

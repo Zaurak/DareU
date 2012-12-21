@@ -1,32 +1,32 @@
 <?php
-	if($updates != null) {
+	if(isset($updates) && $updates != null) {
 		// Display all new updates
 		foreach($updates as $update) {
 			echo '<p>';
-			echo $update->getDate() . '<br />';
+			echo $update['date'] . '<br />';
 			
-			echo $update->getContent() . '<br />';
+			echo $update['content'] . '<br />';
 
-			echo $update->getService() . '<br />';
+			echo $update['service'] . '<br />';
 			// If the member connected is the author of the status, display a link to delete his status
-			if($update->getIdMember() == $_SESSION['idMember']) {
-				echo '<a href="/profile/delete?idUpdate='.$update->getIdUpdate().'">Delete</a>';
+			if($update['idMember'] == $_SESSION['idMember']) {
+				echo '<a href="/profile/delete?idUpdate='.$update['idUpdate'].'">Delete</a>';
 			}
 			// If a status has comments, display them too
-			if($update->getComments() != null) {
-				foreach($update->getComments() as $comment) {
+			if($update['comment'] != null) {
+				foreach($update['comment'] as $comment) {
 					echo '<div id="comment">' .
-						 $comment->getDate() . '<br />' .
-						 $comment->getContent() . '<br />';
+						 $comment['date'] . '<br />' .
+						 $comment['content'] . '<br />';
 					// If the member connected is the author of the comment, display a link to delete his comment
-					if($comment->getIdAuthor() == $_SESSION['idMember']) {
-						echo '<a href="/profile/deleteComment?idComment='.$comment->getIdComment().'">Delete comment</a>';
+					if($comment['idAuthor'] == $_SESSION['idMember']) {
+						echo '<a href="/profile/deleteComment?idComment='.$comment['idComment'].'">Delete comment</a>';
 					}
 					echo '</div>';
 				}
 			}
 			// Comment form
-			echo '<form method="post" action="/profile/comment?idMember=' . $update->getIdMember() . '&idUpdate=' . $update->getIdUpdate() . '">' .
+			echo '<form method="post" action="/profile/comment?idMember=' . $update['idMember'] . '&idUpdate=' . $update['idUpdate'] . '">' .
 				 '<textarea name="comment" id="comment" rows="1" cols="30"></textarea>' .
 				 '<input type="submit" value="Comment" />' .
 				 '</form>';
