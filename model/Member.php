@@ -136,7 +136,12 @@ class Member
 					'image'			=> $this->image, 
 					'website'		=> $this->website
 					));
-			
+			// Update the idMember attribute
+			$req->closeCursor;
+			$req->prepare('SELECT idMember From Member WHERE username = ?');
+			$req->execute(array($this->username));
+			$data = $req->fetch();
+			$this->idMember = $data['idMember'];
 
 		}
 		// If the current member already is in the DB

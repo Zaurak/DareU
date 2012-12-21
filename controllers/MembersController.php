@@ -15,45 +15,49 @@ class MembersController extends ActionController
     }
     
     public function signupAction()
-    {	
-		// If the form hasn't been filled yet
-		$this->message = 'Fill the form to sign up';
-		
-       	if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) ) {
-			// If all the fields haven't been filled
-			if($_POST['username'] == null || $_POST['password'] == null || $_POST['email'] == null) {
-				$this->message = 'All fields are mandatory';
-			}
-			else {
-				// Test if the username is available
-				if(Members::isUserNameTaken($_POST['username'])) {
-					$this->message = 'UserName already taken, please choose another one';
-				}
-				// Test if the e-mail adress is available
-				else if(Members::isMailTaken($_POST['email'])) {
-					$this->message = 'E-mail already taken, please choose another one';
-				}
-				else if (strlen($_POST['username']) <= 4  || 
-					!preg_match("#^[a-z0-9_\.\-]+@[a-z0-9_\.\-]+\.[a-z0-9]{2,4}$#i", $_POST['email']) ||
-					strlen($_POST['password']) < 4) {
-				    $this->message = 'Please, allow javascript to check your input first, you have one or several wrong inputs...';
+    {
+		if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
+			$this->redirect('/');
+		}
+		else {
+			// If the form hasn't been filled yet
+			$this->message = 'Fill the form to sign up';
+			
+       		if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) ) {
+				// If all the fields haven't been filled
+				if($_POST['username'] == null || $_POST['password'] == null || $_POST['email'] == null) {
+					$this->message = 'All fields are mandatory';
 				}
 				else {
-					// Create new member with the information given in the form
-					$member = new Member();
-					$member->setUserName($_POST['username']);
-					$member->setPassword($_POST['password']);
-					$member->setEmail($_POST['email']);
-					$member->setSex($_POST['sex']);
-					$member->save();
-					$this->message = 'Welcome aboard !';
-					$this->createSession($member);
-					$this->redirect('/profile/edit');
+					// Test if the username is available
+					if(Members::isUserNameTaken($_POST['username'])) {
+						$this->message = 'UserName already taken, please choose another one';
+					}
+					// Test if the e-mail adress is available
+					else if(Members::isMailTaken($_POST['email'])) {
+						$this->message = 'E-mail already taken, please choose another one';
+					}
+					else if (strlen($_POST['username']) <= 4  || 
+						!preg_match("#^[a-z0-9_\.\-]+@[a-z0-9_\.\-]+\.[a-z0-9]{2,4}$#i", $_POST['email']) ||
+						strlen($_POST['password']) < 4) {
+					    $this->message = 'Please, allow javascript to check your input first, you have one or several wrong inputs...';
+					}
+					else {
+						// Create new member with the information given in the form
+						$member = new Member();
+						$member->setUserName($_POST['username']);
+						$member->setPassword($_POST['password']);
+						$member->setEmail($_POST['email']);
+						$member->setSex($_POST['sex']);
+						$member->save();
+						$this->message = 'Welcome aboard !';
+						$this->createSession($member);
+						$this->redirect('/profile/edit');
+					}
 				}
 			}
-		}
-    }
-    
+    	}
+   } 
     public function signinAction()
     {
 		// If the form hasn't been filled yet (shouldn't happen)
