@@ -2,7 +2,7 @@ function validateSignInForm() {
 	// TODO
 }
 
-
+/*
 function validateSignUpForm() {
 	return (checkName() && checkEmail() && checkPassword());
 }
@@ -55,4 +55,4 @@ function checkPassword() {
 		return true;
 	}
 }
-
+*/
